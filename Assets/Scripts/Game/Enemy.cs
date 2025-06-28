@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Enemy : MonoBehaviour
 {
-    public float MoveSpeed { get; set; } = 50.0F;
+    public float MoveSpeed = 50.0F;
 
     public GameManager Manager { get; private set; }
 
