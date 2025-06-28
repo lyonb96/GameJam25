@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Enemy : MonoBehaviour
 {
@@ -20,5 +21,16 @@ public class Enemy : MonoBehaviour
         var dirToZero = (Vector3.zero - currentPos).normalized;
         var newPos = currentPos + (dirToZero * MoveSpeed * Time.deltaTime);
         tf.anchoredPosition3D = newPos;
+        if (newPos.sqrMagnitude < 10000)
+        {
+            Manager.CPU.Health -= 1;
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnClicked()
+    {
+        // TODO: spawn a cool effect
+        Destroy(gameObject);
     }
 }
