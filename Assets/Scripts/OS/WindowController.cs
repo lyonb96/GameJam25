@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.EventSystems; // Required for event system interfaces
 using UnityEngine.UI; // Required for Button
 
-public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class WindowController : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Tooltip("The height of the area at the top that serves as the drag handle.")]
-    public float dragHandleHeight = 20f;
+    public float dragHandleHeight = 25f;
 
     private Button closeButton;
     private RectTransform rectTransform;
@@ -35,7 +35,15 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                 closeButton = buttonTransform.GetComponent<Button>();
             }
         }
-        closeButton.onClick.AddListener(CloseWindow);
+        if (closeButton != null)
+        {
+            closeButton.onClick.AddListener(CloseWindow);
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        transform.SetAsLastSibling();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -47,7 +55,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             if (localPoint.y > rectTransform.rect.yMax - dragHandleHeight)
             {
                 isDragging = true;
-                canvasGroup.alpha = 0.6f;
+                canvasGroup.alpha = 0.9f;
                 canvasGroup.blocksRaycasts = false;
             }
             else
