@@ -2,20 +2,18 @@ using UnityEngine;
 using UnityEngine.EventSystems; 
 using UnityEngine.UI; 
 using TMPro; // Required for TextMeshPro
+using System.Linq;
 
 public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Tooltip("The height of the area at the top that serves as the drag handle.")]
     public float dragHandleHeight = 25f;
 
-    [Header("Taskbar")]
-    public GameObject taskbarPrefab;
-    public TaskBar taskBar;
-
     // Component references
     private Button closeButton;
-    private Sprite icon;
+    private Image icon;
     private TextMeshProUGUI title;
+    private GameObject panel;
 
     // Transform and Canvas references
     private RectTransform rectTransform;
@@ -24,8 +22,26 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private CanvasGroup canvasGroup;
     private bool isDragging = false;
 
+    private OSWindow window;
+
+    public void SetOSWindow(OSWindow window)
+    {
+        this.window = window;
+        title.SetText(window.Title);
+        icon.sprite = window.Icon;
+        // TODO: instantiate window content
+        Instantiate(window.Content, panel.transform);
+    }
+
     private void Awake()
     {
+        title = GetComponentInChildren<TextMeshProUGUI>();
+        icon = GetComponentsInChildren<Image>()
+            .First(i => i.name == "Icon");
+        panel = GetComponentsInChildren<CanvasRenderer>()
+            .First(i => i.name == "Panel")
+            .gameObject;
+
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasRectTransform = canvas.GetComponent<RectTransform>();
@@ -36,14 +52,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
 
         // Auto-fetch UI elements from children
-        if (closeButton == null)
-        {
-            Transform buttonTransform = transform.Find("CloseButton");
-            if (buttonTransform != null)
-            {
-                closeButton = buttonTransform.GetComponent<Button>();
-            }
-        }
+        closeButton = GetComponentInChildren<Button>();
         closeButton.onClick.AddListener(CloseWindow);
 
     }
