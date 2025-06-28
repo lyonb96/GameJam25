@@ -93,8 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragHandleHeight: 20
-  activeWinBarSprite: {fileID: 21300000, guid: 8ec45f5adde2f4849ad04a9d06c98f8e, type: 3}
-  inactiveWinBarSprite: {fileID: 21300000, guid: 63ed354d1df23764682df43adc363888, type: 3}
+  taskbarPrefab: {fileID: 4743419538377134235, guid: 869df2f0c54292e49a741d470fcf99cf, type: 3}
 --- !u!1 &1184114872302443220
 GameObject:
   m_ObjectHideFlags: 0
