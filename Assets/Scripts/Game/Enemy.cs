@@ -29,7 +29,13 @@ public class Enemy : MonoBehaviour
 
     public void OnClicked()
     {
+        Die();
+    }
+
+    public void Die()
+    {
         // TODO: spawn a cool effect
+        // TODO: Score
         Destroy(gameObject);
     }
 }
