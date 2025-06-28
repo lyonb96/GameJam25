@@ -7,13 +7,24 @@ public class WindowController : MonoBehaviour, IPointerDownHandler, IBeginDragHa
     [Tooltip("The height of the area at the top that serves as the drag handle.")]
     public float dragHandleHeight = 25f;
 
+    [Header("UI References")]
+    [Tooltip("Reference to the close button. Will be auto-fetched if not assigned.")]
     private Button closeButton;
+    [Tooltip("Reference to the title bar image. Will be auto-fetched if not assigned.")]
+    private Image winBarImage;
+
+    [Header("Focus Visuals")]
+    [SerializeField] private Sprite activeWinBarSprite;
+    [SerializeField] private Sprite inactiveWinBarSprite;
+
     private RectTransform rectTransform;
     private Canvas canvas;
     private RectTransform canvasRectTransform;
     private CanvasGroup canvasGroup;
-    private bool isDragging = false; 
+    private bool isDragging = false;
+    private bool isFocused = false;
 
+    public static event System.Action<WindowController> OnWindowFocused;
 
     private void Awake()
     {
@@ -39,11 +50,35 @@ public class WindowController : MonoBehaviour, IPointerDownHandler, IBeginDragHa
         {
             closeButton.onClick.AddListener(CloseWindow);
         }
+
+        // Auto-fetch the WinBar image
+        if (winBarImage == null)
+        {
+            Transform winBarTransform = transform.Find("WinBar");
+            if (winBarTransform != null)
+            {
+                winBarImage = winBarTransform.GetComponent<Image>();
+            }
+        }
+
+        OnWindowFocused += HandleWindowFocus;
+    }
+
+    private void OnDestroy()
+    {
+        OnWindowFocused -= HandleWindowFocus;
+    }
+
+    private void Start()
+    {
+        // Make this window focused when it's created.
+        OnWindowFocused?.Invoke(this);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         transform.SetAsLastSibling();
+        OnWindowFocused?.Invoke(this);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -88,6 +123,19 @@ public class WindowController : MonoBehaviour, IPointerDownHandler, IBeginDragHa
     private void CloseWindow()
     {
         Destroy(gameObject);
+    }
+
+    private void HandleWindowFocus(WindowController focusedWindow)
+    {
+        bool hasFocus = (focusedWindow == this);
+        if (isFocused == hasFocus) return; // No change in focus state
+
+        isFocused = hasFocus;
+
+        if (winBarImage != null && activeWinBarSprite != null && inactiveWinBarSprite != null)
+        {
+            winBarImage.sprite = isFocused ? activeWinBarSprite : inactiveWinBarSprite;
+        }
     }
 
     private void ClampToScreen()
