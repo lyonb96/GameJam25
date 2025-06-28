@@ -1,0 +1,24 @@
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    public float MoveSpeed { get; set; } = 50.0F;
+
+    public GameManager Manager { get; private set; }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        Manager = GetComponentInParent<GameManager>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        var tf = transform as RectTransform;
+        var currentPos = tf.anchoredPosition3D;
+        var dirToZero = (Vector3.zero - currentPos).normalized;
+        var newPos = currentPos + (dirToZero * MoveSpeed * Time.deltaTime);
+        tf.anchoredPosition3D = newPos;
+    }
+}
