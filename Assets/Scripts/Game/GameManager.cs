@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
                 z = 0.0F,
             }.normalized;
             Vector3 pos = dir * 1000.0F;
-            Instantiate(EnemyPrefab, pos, Quaternion.identity, transform);
+            Instantiate(EnemyPrefab, transform.position + pos, Quaternion.identity, transform);
         }
     }
 }
