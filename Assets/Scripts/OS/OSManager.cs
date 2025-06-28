@@ -34,7 +34,7 @@ public class OSManager : MonoBehaviour
             WindowSize.Large => LargeWindowPrefab,
             _ => SmallWindowPrefab,
         };
-        var obj = Instantiate(windowPrefab, Vector3.zero, Quaternion.identity, transform);
+        var obj = Instantiate(windowPrefab, transform.position, Quaternion.identity, transform);
         if (obj.TryGetComponent<WindowController>(out var windowHandle))
         {
             windowHandle.SetOSWindow(window);
