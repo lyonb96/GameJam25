@@ -30,7 +30,13 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         title.SetText(window.Title);
         icon.sprite = window.Icon;
         // TODO: instantiate window content
-        Instantiate(window.Content, panel.transform);
+        var windowContent = Instantiate(window.Content, panel.transform);
+        if (windowContent.TryGetComponent<RectTransform>(out var tf))
+        {
+            tf.anchorMin = Vector2.zero;
+            tf.anchorMax = Vector2.one;
+            tf.sizeDelta = Vector2.zero;
+        }
     }
 
     private void Awake()
