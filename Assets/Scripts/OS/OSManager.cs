@@ -149,6 +149,24 @@ public class OSManager : MonoBehaviour
         });
     }
 
+    public void AddWarning(string message, bool blocking = true, Action onClose = null)
+    {
+        var error = Instantiate(ErrorPrefab);
+        var text = error.GetComponentInChildren<TextMeshProUGUI>();
+        text.text = message;
+        var image = error.GetComponentInChildren<Image>();
+        image.sprite = WarningIcon;
+        SpawnWindow(new()
+        {
+            Size = WindowSize.Small,
+            Icon = WarningIcon,
+            Title = "Warning",
+            Content = error,
+            IsBlocking = blocking,
+            OnClose = onClose,
+        });
+    }
+
     public void SetHovering(bool hovering)
     {
         this.hovering = hovering;
