@@ -110,7 +110,7 @@ public class OSManager : MonoBehaviour
         taskBar.AddProgram(task);
     }
 
-    public void OpenCommandPrompt(Action onClose = null)
+    public void OpenCommandPrompt(string terminateCommand = null, GameObject lifespanWatcher = null, Action onClose = null)
     {
         SpawnWindow(new()
         {
@@ -121,6 +121,12 @@ public class OSManager : MonoBehaviour
             IsBlocking = true,
             AllowCloseButton = false,
             OnClose = onClose,
+            LifespanWatcher = lifespanWatcher,
+            OnContentCreated = (content) =>
+            {
+                var commandPrompt = content.GetComponent<CommandPrompt>();
+                commandPrompt.TerminateCommand = terminateCommand;
+            },
         });
     }
 
