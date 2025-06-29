@@ -4,6 +4,8 @@ public class Enemy : MonoBehaviour
 {
     public float MoveSpeed = 200.0F;
 
+    public bool RequiresCommand;
+
     public GameManager Manager { get; private set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,7 +31,17 @@ public class Enemy : MonoBehaviour
 
     public void OnClicked()
     {
-        Die();
+        if (RequiresCommand)
+        {
+            OSManager.Instance.OpenCommandPrompt(() =>
+            {
+                Die();
+            });
+        }
+        else
+        {
+            Die();
+        }
     }
 
     public void Die()
