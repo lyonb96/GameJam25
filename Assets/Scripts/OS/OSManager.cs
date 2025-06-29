@@ -147,12 +147,12 @@ public class OSManager : MonoBehaviour
         this.hovering = hovering;
     }
 
-    public void SetLoading(bool hovering)
+    public void SetLoading(bool loading)
     {
-        this.loading = hovering;
+        this.loading = loading;
     }
 
-    public void SetDefaultCursor()
+    private void SetDefaultCursor()
     {
         Cursor.SetCursor(cursor, hotspot, CursorMode.Auto);
     }
