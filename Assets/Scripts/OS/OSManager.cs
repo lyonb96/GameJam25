@@ -29,10 +29,16 @@ public class OSManager : MonoBehaviour
 
     private List<OSWindow> Windows { get; set; } = new();
 
+    public Texture2D cursor;
+    public Texture2D cursorHover;
+    public Texture2D cursorLoad; 
+    public Vector2 hotspot = Vector2.zero;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Instance = this;
+        SetDefaultCursor();
     }
 
     // Update is called once per frame
@@ -110,5 +116,20 @@ public class OSManager : MonoBehaviour
             IsBlocking = blocking,
             OnClose = onClose,
         });
+    }
+
+    public void SetDefaultCursor()
+    {
+        Cursor.SetCursor(cursor, hotspot, CursorMode.Auto);
+    }
+
+    public void SetHoverCursor()
+    {
+        Cursor.SetCursor(cursorHover, hotspot, CursorMode.Auto);
+    }
+
+    public void SetLoadingCursor()
+    {
+        Cursor.SetCursor(cursorLoad, hotspot, CursorMode.Auto);
     }
 }
