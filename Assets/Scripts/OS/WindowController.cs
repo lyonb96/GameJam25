@@ -38,6 +38,11 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             tf.anchorMin = Vector2.zero;
             tf.anchorMax = Vector2.one;
             tf.sizeDelta = Vector2.zero;
+            tf.pivot = Vector2.one / 2.0F;
+            tf.position = Vector3.zero;
+            tf.localScale = Vector3.one;
+            tf.offsetMax = Vector3.zero;
+            tf.offsetMin = Vector3.zero;
         }
     }
 
