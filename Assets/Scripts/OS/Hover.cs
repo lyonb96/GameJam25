@@ -19,4 +19,10 @@ public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         OSManager.Instance.SetHovering(false);
     }
+
+    public void OnDisable()
+    {
+        OSManager.Instance.SetHovering(false);
+    }
+
 }
