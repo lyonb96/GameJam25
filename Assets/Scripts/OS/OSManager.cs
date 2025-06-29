@@ -93,9 +93,9 @@ public class OSManager : MonoBehaviour
             var windowSize = window.Size switch
             {
                 WindowSize.Special => new Vector2(800, 400),
-                WindowSize.Small => new Vector2(400, 200),
-                WindowSize.Medium => new Vector2(800, 600),
-                WindowSize.Folder => new Vector2(650, 600),
+                WindowSize.Small => new Vector2(650, 260),
+                WindowSize.Folder => new Vector2(800, 600),
+                WindowSize.Medium => new Vector2(1000, 720),
                 _ => new Vector2(1250, 900),
             };
             tf.sizeDelta = windowSize;
@@ -146,6 +146,24 @@ public class OSManager : MonoBehaviour
             Size = WindowSize.Small,
             Icon = ErrorIcon,
             Title = "Error",
+            Content = error,
+            IsBlocking = blocking,
+            OnClose = onClose,
+        });
+    }
+
+    public void AddWarning(string message, bool blocking = true, Action onClose = null)
+    {
+        var error = Instantiate(ErrorPrefab);
+        var text = error.GetComponentInChildren<TextMeshProUGUI>();
+        text.text = message;
+        var image = error.GetComponentInChildren<Image>();
+        image.sprite = WarningIcon;
+        SpawnWindow(new()
+        {
+            Size = WindowSize.Small,
+            Icon = WarningIcon,
+            Title = "Warning",
             Content = error,
             IsBlocking = blocking,
             OnClose = onClose,

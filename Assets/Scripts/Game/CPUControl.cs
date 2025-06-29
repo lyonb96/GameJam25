@@ -12,6 +12,8 @@ public class CPUControl : MonoBehaviour
 
     private Animator animator;
 
+    public AudioSource audioSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +33,7 @@ public class CPUControl : MonoBehaviour
     {
         Health -= 1;
         gameManager.OnCPUDamaged();
+        audioSource.Play();
         UpdateSprite();
         if (Health <= 0)
         {
