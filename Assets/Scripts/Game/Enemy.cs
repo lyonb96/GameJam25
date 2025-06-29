@@ -29,7 +29,10 @@ public class Enemy : MonoBehaviour
 
     public void OnClicked()
     {
-        Die();
+        OSManager.Instance.OpenCommandPrompt(() =>
+        {
+            Die();
+        });
     }
 
     public void Die()

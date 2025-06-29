@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using TMPro; 
 using UnityEngine.UI; 
 using UnityEngine;
+using System;
+using System.Collections;
 
 public class OSManager : MonoBehaviour
 {
@@ -11,11 +13,15 @@ public class OSManager : MonoBehaviour
 
     public Sprite WarningIcon;
 
+    public Sprite CommandLineIcon;
+
     public GameObject ErrorPrefab;
 
     public GameObject TaskPrefab;
 
     public GameObject BlockerPrefab;
+
+    public GameObject CommandPromptPrefab;
 
     public TaskBar taskBar;
 
@@ -36,6 +42,12 @@ public class OSManager : MonoBehaviour
 
     public void SpawnWindow(OSWindow window)
     {
+        StartCoroutine(SpawnWindowRoutine(window));
+    }
+
+    private IEnumerator SpawnWindowRoutine(OSWindow window)
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0.5F, 1.5F));
         Windows.Add(window);
         GameObject blocker = null;
         if (window.IsBlocking)
@@ -47,6 +59,7 @@ public class OSManager : MonoBehaviour
         {
             var windowSize = window.Size switch
             {
+                WindowSize.Special => new Vector2(800, 400),
                 WindowSize.Small => new Vector2(400, 200),
                 WindowSize.Medium => new Vector2(800, 600),
                 _ => new Vector2(1250, 900),
@@ -67,7 +80,21 @@ public class OSManager : MonoBehaviour
         taskBar.AddProgram(task);
     }
 
-    public void AddError(string message, bool blocking = true)
+    public void OpenCommandPrompt(Action onClose = null)
+    {
+        SpawnWindow(new()
+        {
+            Size = WindowSize.Special,
+            Icon = CommandLineIcon,
+            Title = "Console",
+            Content = CommandPromptPrefab,
+            IsBlocking = true,
+            AllowCloseButton = false,
+            OnClose = onClose,
+        });
+    }
+
+    public void AddError(string message, bool blocking = true, Action onClose = null)
     {
         var error = Instantiate(ErrorPrefab);
         var text = error.GetComponentInChildren<TextMeshProUGUI>();
@@ -81,6 +108,7 @@ public class OSManager : MonoBehaviour
             Title = "Error",
             Content = error,
             IsBlocking = blocking,
+            OnClose = onClose,
         });
     }
 }

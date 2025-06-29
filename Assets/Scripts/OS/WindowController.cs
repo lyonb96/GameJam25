@@ -36,6 +36,10 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         this.window = window;
         title.SetText(window.Title);
         icon.sprite = window.Icon;
+        if (!window.AllowCloseButton)
+        {
+            closeButton.interactable = false;
+        }
         var windowContent = Instantiate(window.Content, panel.transform);
         if (windowContent.TryGetComponent<RectTransform>(out var tf))
         {
@@ -72,7 +76,6 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         // Auto-fetch UI elements from children
         closeButton = GetComponentInChildren<Button>();
         closeButton.onClick.AddListener(CloseWindow);
-
 
 
     }
@@ -142,7 +145,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         transform.SetAsLastSibling();
     }
 
-    private void CloseWindow()
+    public void CloseWindow()
     {
         if (blocker != null)
         {
@@ -150,6 +153,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
         Destroy(task);
         Destroy(gameObject);
+        window.OnClose?.Invoke();
     }
 
     private void ClampToScreen()

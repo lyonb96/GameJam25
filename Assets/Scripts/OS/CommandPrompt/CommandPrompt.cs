@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class CommandPrompt : MonoBehaviour
@@ -19,12 +20,24 @@ public class CommandPrompt : MonoBehaviour
     {
         if (text.ToLower() == "killtask")
         {
-            Destroy(gameObject);
+            OSHelpers.DestroyWindow(gameObject);
         }
         else
         {
-            Instantiate(ResponsePrefab, transform);
+            SpawnResponse("ERROR unrecognized command: " + text, true);
             SpawnNewLine();
+        }
+    }
+
+    private void SpawnResponse(string res, bool isError)
+    {
+        var responseObject = Instantiate(ResponsePrefab, transform);
+        if (responseObject.TryGetComponent<TextMeshProUGUI>(out var resText))
+        {
+            resText.text = res;
+            resText.color = isError
+                ? Color.darkRed
+                : Color.white;
         }
     }
 
