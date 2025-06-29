@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public float MoveSpeed = 150.0F;
 
+    public int Damage = 1;
+
     public bool RequiresCommand;
 
     public string ProcessId;
@@ -13,6 +15,8 @@ public class Enemy : MonoBehaviour
     public bool IsElevated;
 
     public GameManager Manager { get; private set; }
+
+    public bool SpawnErrorOnHit = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +30,7 @@ public class Enemy : MonoBehaviour
                 GetComponent<Image>().color = Color.red;
             }
         }
-        ProcessId = ((int)(Random.value * 10000)).ToString("00000");
+        ProcessId = ((int)(Random.value * 10000)).ToString("0000");
         var text = GetComponentInChildren<TextMeshProUGUI>();
         if (text != null)
         {
@@ -40,11 +44,15 @@ public class Enemy : MonoBehaviour
         var tf = transform as RectTransform;
         var currentPos = tf.anchoredPosition3D;
         var dirToZero = (Vector3.zero - currentPos).normalized;
-        var newPos = currentPos + (dirToZero * MoveSpeed * Time.deltaTime);
+        var newPos = currentPos + (MoveSpeed * Time.deltaTime * dirToZero);
         tf.anchoredPosition3D = newPos;
         if (newPos.sqrMagnitude < 10000)
         {
-            Manager.CPU.Damage();
+            Manager.CPU.Damage(Damage);
+            if (SpawnErrorOnHit)
+            {
+                OSManager.Instance.AddError("Unexpected voltage surge; some system functions may have been impacted");
+            }
             Destroy(gameObject);
         }
     }

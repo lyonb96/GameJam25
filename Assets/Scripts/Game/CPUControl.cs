@@ -28,9 +28,9 @@ public class CPUControl : MonoBehaviour
         HealthText.SetText(Health.ToString());
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
-        Health -= 1;
+        Health -= damage;
         gameManager.OnCPUDamaged();
         audioSource.Play();
         UpdateSprite();
