@@ -31,7 +31,9 @@ public class OSManager : MonoBehaviour
 
     public Texture2D cursor;
     public Texture2D cursorHover;
-    public Texture2D cursorLoad; 
+    public Texture2D cursorLoad;
+    private bool hovering;
+    private bool loading;
     public Vector2 hotspot = Vector2.zero;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,16 +46,38 @@ public class OSManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (loading)
+        {
+            SetLoadingCursor();
+        }
+        else if (hovering)
+        {
+            SetHoverCursor();
+        }
+        else
+        {
+            SetDefaultCursor();
+        }
     }
 
     public void SpawnWindow(OSWindow window)
     {
-        StartCoroutine(SpawnWindowRoutine(window));
+        StartCoroutine(SpawnWindowRoutine(window, window.IsBlocking));
     }
 
-    private IEnumerator SpawnWindowRoutine(OSWindow window)
+    private IEnumerator SpawnWindowRoutine(OSWindow window, bool fast = false)
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(0.5F, 1.5F));
+        loading = true;
+        if (!fast)
+        {
+            var delay = UnityEngine.Random.Range(0.25F, 0.75F);
+            if (UnityEngine.Random.Range(0.0F, 1.0F) < 0.01F)
+            {
+                delay *= 10.0F;
+            }
+            yield return new WaitForSeconds(delay);
+        }
+        loading = false;
         Windows.Add(window);
         GameObject blocker = null;
         if (window.IsBlocking)
@@ -118,17 +142,22 @@ public class OSManager : MonoBehaviour
         });
     }
 
-    public void SetDefaultCursor()
+    public void SetHovering(bool hovering)
+    {
+        this.hovering = hovering;
+    }
+
+    private void SetDefaultCursor()
     {
         Cursor.SetCursor(cursor, hotspot, CursorMode.Auto);
     }
 
-    public void SetHoverCursor()
+    private void SetHoverCursor()
     {
         Cursor.SetCursor(cursorHover, hotspot, CursorMode.Auto);
     }
 
-    public void SetLoadingCursor()
+    private void SetLoadingCursor()
     {
         Cursor.SetCursor(cursorLoad, hotspot, CursorMode.Auto);
     }

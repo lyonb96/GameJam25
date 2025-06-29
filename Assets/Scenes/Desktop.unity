@@ -295,6 +295,18 @@ PrefabInstance:
       propertyPath: WindowContent
       value: 
       objectReference: {fileID: 1497702745886218164, guid: 6e21616c91133704c9c810b270410aa9, type: 3}
+    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 8c6ea5b3c82936b4bbec16ecd012b7e8, type: 3}
+    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: cursorLoad
+      value: 
+      objectReference: {fileID: 2800000, guid: 8ad56c7faefd58a4fab9def63a73a185, type: 3}
+    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: cursorHover
+      value: 
+      objectReference: {fileID: 2800000, guid: 69e74803e6a29a24ba12f8bd46f25206, type: 3}
     - target: {fileID: 2801917718753198132, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -673

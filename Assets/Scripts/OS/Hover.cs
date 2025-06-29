@@ -3,29 +3,20 @@ using UnityEngine.EventSystems;
 
 public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private OSManager osManager;
-
-    void Start()
-    {
-        // Fetch the OSManager instance from the scene
-        osManager = FindAnyObjectByType<OSManager>();
-
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         // Change to hover cursor when mouse enters the UI element
-        osManager?.SetHoverCursor();
+        OSManager.Instance.SetHovering(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         // Revert to default cursor when mouse exits
-        osManager?.SetDefaultCursor();
+        OSManager.Instance.SetHovering(false);
     }
 
     public void OnDestroy()
     {
-        osManager?.SetDefaultCursor();
+        OSManager.Instance.SetHovering(false);
     }
 }
