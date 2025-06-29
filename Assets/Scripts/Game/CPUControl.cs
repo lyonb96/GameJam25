@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +10,8 @@ public class CPUControl : MonoBehaviour
     private GameManager gameManager;
 
     private Animator animator;
+
+    public AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,9 +28,11 @@ public class CPUControl : MonoBehaviour
         HealthText.SetText(Health.ToString());
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
-        Health -= 1;
+        Health -= damage;
+        gameManager.OnCPUDamaged();
+        audioSource.Play();
         UpdateSprite();
         if (Health <= 0)
         {
