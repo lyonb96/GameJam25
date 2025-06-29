@@ -8,7 +8,7 @@ public class TaskBar : MonoBehaviour
     private List<GameObject> programs = new List<GameObject>();
 
     // Positioning constants
-    private const float startX = -600;
+    private const float startX = -640;
     private const float programWidth = 135f;
     private const float spacing = 5;
     private const float yPos = 1f;

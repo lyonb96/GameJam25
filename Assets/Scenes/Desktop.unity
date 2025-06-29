@@ -577,6 +577,8 @@ MonoBehaviour:
   SmallWindowPrefab: {fileID: 0}
   MediumWindowPrefab: {fileID: 0}
   LargeWindowPrefab: {fileID: 508444213157626241, guid: 795e22b9b34c48747833696b533ebe70, type: 3}
+  TaskPrefab: {fileID: 4743419538377134235, guid: 869df2f0c54292e49a741d470fcf99cf, type: 3}
+  taskBar: {fileID: 645327672}
 --- !u!1001 &994286660
 PrefabInstance:
   m_ObjectHideFlags: 0

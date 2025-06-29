@@ -47,6 +47,7 @@ public class OSManager : MonoBehaviour
         {
             windowHandle.SetOSWindow(window);
             windowHandle.task = task.GetComponent<BarProgram>();
+            task.GetComponent<BarProgram>().window = windowHandle;
         }
         task.GetComponentInChildren<TextMeshProUGUI>().text = window.Title;
         task.transform.Find("Image").GetComponent<Image>().sprite = window.Icon;

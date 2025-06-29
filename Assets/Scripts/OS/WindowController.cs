@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro; 
 using System.Linq;
 using System.Threading.Tasks;
+using UnityEditor.UI;
 
 public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -23,6 +24,11 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private RectTransform canvasRectTransform;
     private CanvasGroup canvasGroup;
     private bool isDragging = false;
+
+    // Sprites
+    public Sprite WinBarActive;
+    public Sprite WinBarInactive;
+    private Image winBar;
 
     public OSWindow window;
 
@@ -48,6 +54,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     private void Awake()
     {
+        winBar = transform.Find("WinBar").gameObject.GetComponent<Image>();
         title = GetComponentInChildren<TextMeshProUGUI>();
         icon = GetComponentsInChildren<Image>()
             .First(i => i.name == "Icon");
@@ -75,6 +82,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public void OnBeginDrag(PointerEventData eventData)
     {
         isDragging = false;
+        OnFocus();
 
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
         {
@@ -111,9 +119,24 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
     }
 
+    public void Update()
+    {
+        if (transform.GetSiblingIndex() == transform.parent.childCount - 1)
+        {
+            winBar.sprite = WinBarActive;
+            task.GetComponent<BarProgram>().SetActive(true);
+        }
+        else
+        {
+            winBar.sprite = WinBarInactive;
+            task.GetComponent<BarProgram>().SetActive(false);
+        }
+    }
+
     public void OnFocus()
     {
         // OSManager.Instance.FocusWindow(this);
+
         transform.SetAsLastSibling();
     }
 
