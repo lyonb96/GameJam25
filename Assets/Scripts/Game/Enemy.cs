@@ -29,16 +29,13 @@ public class Enemy : MonoBehaviour
 
     public void OnClicked()
     {
-        OSManager.Instance.OpenCommandPrompt(() =>
-        {
-            Die();
-        });
+        Die();
     }
 
     public void Die()
     {
         // TODO: spawn a cool effect
-        // TODO: Score
+        Manager.OnEnemyKilled();
         Destroy(gameObject);
     }
 }

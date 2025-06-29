@@ -147,6 +147,11 @@ public class OSManager : MonoBehaviour
         this.hovering = hovering;
     }
 
+    public void SetLoading(bool loading)
+    {
+        this.loading = loading;
+    }
+
     private void SetDefaultCursor()
     {
         Cursor.SetCursor(cursor, hotspot, CursorMode.Auto);

@@ -30,6 +30,7 @@ public class CPUControl : MonoBehaviour
     public void Damage()
     {
         Health -= 1;
+        gameManager.OnCPUDamaged();
         UpdateSprite();
         if (Health <= 0)
         {
