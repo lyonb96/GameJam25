@@ -48,8 +48,8 @@ public class OSManager : MonoBehaviour
             var windowSize = window.Size switch
             {
                 WindowSize.Small => new Vector2(400, 200),
-                WindowSize.Medium => new Vector2(600, 300),
-                _ => new Vector2(800, 600),
+                WindowSize.Medium => new Vector2(800, 600),
+                _ => new Vector2(1250, 900),
             };
             tf.sizeDelta = windowSize;
         }

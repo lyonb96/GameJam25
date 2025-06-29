@@ -3,8 +3,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 using TMPro; 
 using System.Linq;
-using System.Threading.Tasks;
-using UnityEditor.UI;
 
 public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -38,7 +36,6 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         this.window = window;
         title.SetText(window.Title);
         icon.sprite = window.Icon;
-        // TODO: instantiate window content
         var windowContent = Instantiate(window.Content, panel.transform);
         if (windowContent.TryGetComponent<RectTransform>(out var tf))
         {
@@ -122,6 +119,10 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void Update()
     {
+        if (task == null)
+        {
+            return;
+        }
         if (transform.GetSiblingIndex() == transform.parent.childCount - 1)
         {
             winBar.sprite = WinBarActive;
