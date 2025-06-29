@@ -71,7 +71,7 @@ public class OSManager : MonoBehaviour
         if (!fast)
         {
             var delay = UnityEngine.Random.Range(0.25F, 0.75F);
-            if (UnityEngine.Random.Range(0.0F, 1.0F) < 0.01F)
+            if (UnityEngine.Random.Range(0.0F, 1.0F) < 0.05F)
             {
                 delay *= 10.0F;
             }
