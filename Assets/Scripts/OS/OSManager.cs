@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class OSManager : MonoBehaviour
 {
-    public GameObject SmallWindowPrefab;
-
-    public GameObject MediumWindowPrefab;
-
     public GameObject LargeWindowPrefab;
 
+    public Sprite ErrorIcon;
+
+    public Sprite WarningIcon;
+
+    public GameObject ErrorPrefab;
+
     public GameObject TaskPrefab;
+
+    public GameObject BlockerPrefab;
 
     public TaskBar taskBar;
 
@@ -33,24 +37,50 @@ public class OSManager : MonoBehaviour
     public void SpawnWindow(OSWindow window)
     {
         Windows.Add(window);
-        var windowPrefab = window.Size switch
+        GameObject blocker = null;
+        if (window.IsBlocking)
         {
-            WindowSize.Small => SmallWindowPrefab,
-            WindowSize.Medium => MediumWindowPrefab,
-            WindowSize.Large => LargeWindowPrefab,
-            _ => SmallWindowPrefab,
-        };
-        var obj = Instantiate(windowPrefab, transform.position, Quaternion.identity, transform);
+            blocker = Instantiate(BlockerPrefab, transform);
+        }
+        var obj = Instantiate(LargeWindowPrefab, transform.position, Quaternion.identity, transform);
+        if (obj.TryGetComponent<RectTransform>(out var tf))
+        {
+            var windowSize = window.Size switch
+            {
+                WindowSize.Small => new Vector2(400, 200),
+                WindowSize.Medium => new Vector2(600, 300),
+                _ => new Vector2(800, 600),
+            };
+            tf.sizeDelta = windowSize;
+        }
         GameObject task = Instantiate(TaskPrefab, taskBar.transform);
         task.GetComponent<BarProgram>().taskbar = taskBar;
         if (obj.TryGetComponent<WindowController>(out var windowHandle))
         {
             windowHandle.SetOSWindow(window);
+            windowHandle.blocker = blocker;
             windowHandle.task = task.GetComponent<BarProgram>();
             task.GetComponent<BarProgram>().window = windowHandle;
         }
         task.GetComponentInChildren<TextMeshProUGUI>().text = window.Title;
         task.transform.Find("Image").GetComponent<Image>().sprite = window.Icon;
         taskBar.AddProgram(task);
+    }
+
+    public void AddError(string message, bool blocking = true)
+    {
+        var error = Instantiate(ErrorPrefab);
+        var text = error.GetComponentInChildren<TextMeshProUGUI>();
+        text.text = message;
+        var image = error.GetComponentInChildren<Image>();
+        image.sprite = ErrorIcon;
+        SpawnWindow(new()
+        {
+            Size = WindowSize.Small,
+            Icon = ErrorIcon,
+            Title = "Error",
+            Content = error,
+            IsBlocking = blocking,
+        });
     }
 }

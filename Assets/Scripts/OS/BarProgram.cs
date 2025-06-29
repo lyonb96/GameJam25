@@ -29,7 +29,10 @@ public class BarProgram : MonoBehaviour
 
     void OnDestroy()
     {
-        taskbar.RemoveProgram(gameObject);
+        if (taskbar != null)
+        {
+            taskbar.RemoveProgram(gameObject);
+        }
         Destroy(gameObject);
     }
 }

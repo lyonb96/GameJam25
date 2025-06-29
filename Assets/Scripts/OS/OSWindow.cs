@@ -9,6 +9,8 @@ public class OSWindow
     public WindowSize Size { get; set; }
 
     public GameObject Content { get; set; }
+
+    public bool IsBlocking { get; set; }
 }
 
 public enum WindowSize

@@ -7,14 +7,17 @@ public class TaskBar : MonoBehaviour
     [SerializeField]
     private List<GameObject> programs = new List<GameObject>();
 
+    private GameObject panel;
+
     // Positioning constants
-    private const float startX = -640;
+    private const float startX = 0;
     private const float programWidth = 135f;
     private const float spacing = 5;
-    private const float yPos = 1f;
+    private const float yPos = 0f;
 
     void Start()
     {
+        panel = transform.Find("Panel").gameObject;
         RepositionPrograms();
     }
 
@@ -23,7 +26,14 @@ public class TaskBar : MonoBehaviour
         if (program != null && !programs.Contains(program))
         {
             programs.Add(program);
-            program.transform.SetParent(this.transform, false);
+            program.transform.SetParent(panel.transform, false);
+            if (program.TryGetComponent<RectTransform>(out var tf))
+            {
+                var pivot = new Vector2(0.0F, 0.5F);
+                tf.anchorMin = pivot;
+                tf.anchorMax = pivot;
+                tf.pivot = pivot;
+            }
             RepositionPrograms();
         }
     }

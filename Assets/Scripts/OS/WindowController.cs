@@ -31,6 +31,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private Image winBar;
 
     public OSWindow window;
+    public GameObject blocker;
 
     public void SetOSWindow(OSWindow window)
     {
@@ -142,6 +143,10 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     private void CloseWindow()
     {
+        if (blocker != null)
+        {
+            Destroy(blocker);
+        }
         Destroy(task);
         Destroy(gameObject);
     }
