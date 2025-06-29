@@ -384,10 +384,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 280965846587852892, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: WindowContent
+      value: 
+      objectReference: {fileID: 1497702745886218164, guid: 6e21616c91133704c9c810b270410aa9, type: 3}
     - target: {fileID: 413593012388835376, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       propertyPath: m_ShowMaskGraphic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: f306409e60969654badc0769a6ff2b8e, type: 3}
+    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: cursorLoad
+      value: 
+      objectReference: {fileID: 2800000, guid: 8ec43a792cd6ca44288358ba31352ff9, type: 3}
+    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: cursorHover
+      value: 
+      objectReference: {fileID: 2800000, guid: efccbabf6334d5e40a2f71d5e0717d30, type: 3}
     - target: {fileID: 2801917718753198132, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -627.9998

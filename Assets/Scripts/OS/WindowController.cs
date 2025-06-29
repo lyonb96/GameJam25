@@ -3,8 +3,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 using TMPro; 
 using System.Linq;
-using System.Threading.Tasks;
-using UnityEditor.UI;
 
 public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -38,7 +36,10 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         this.window = window;
         title.SetText(window.Title);
         icon.sprite = window.Icon;
-        // TODO: instantiate window content
+        if (!window.AllowCloseButton)
+        {
+            closeButton.interactable = false;
+        }
         var windowContent = Instantiate(window.Content, panel.transform);
         if (windowContent.TryGetComponent<RectTransform>(out var tf))
         {
@@ -75,7 +76,6 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         // Auto-fetch UI elements from children
         closeButton = GetComponentInChildren<Button>();
         closeButton.onClick.AddListener(CloseWindow);
-
 
 
     }
@@ -122,6 +122,10 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void Update()
     {
+        if (task == null)
+        {
+            return;
+        }
         if (transform.GetSiblingIndex() == transform.parent.childCount - 1)
         {
             winBar.sprite = WinBarActive;
@@ -141,7 +145,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         transform.SetAsLastSibling();
     }
 
-    private void CloseWindow()
+    public void CloseWindow()
     {
         if (blocker != null)
         {
@@ -149,6 +153,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
         Destroy(task);
         Destroy(gameObject);
+        window.OnClose?.Invoke();
     }
 
     private void ClampToScreen()

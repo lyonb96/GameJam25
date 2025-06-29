@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class OSWindow
@@ -11,6 +12,10 @@ public class OSWindow
     public GameObject Content { get; set; }
 
     public bool IsBlocking { get; set; }
+
+    public Action OnClose { get; set; }
+
+    public bool AllowCloseButton { get; set; } = true;
 }
 
 public enum WindowSize
@@ -18,4 +23,5 @@ public enum WindowSize
     Small,
     Medium,
     Large,
+    Special,
 }
