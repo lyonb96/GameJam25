@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using System;
+using System.Collections;
+
 
 public class BrowserController : MonoBehaviour
 {
@@ -27,7 +29,8 @@ public class BrowserController : MonoBehaviour
             directory.Add(page);
             page.SetActive(false);
         }
-        NavigateToAddress(directory[0].name);
+
+        StartCoroutine(GoToPage(directory[0], true));
     }
 
     void NavigateToAddress(string address)
@@ -37,7 +40,7 @@ public class BrowserController : MonoBehaviour
         GameObject pageToLoad = directory.FirstOrDefault(p => p.name.Equals(address, StringComparison.OrdinalIgnoreCase));
         if (pageToLoad != null)
         {
-            GoToPage(pageToLoad);
+            StartCoroutine(GoToPage(pageToLoad));
         }
         else if (currentPage != null && addressBar != null)
         {
@@ -45,20 +48,38 @@ public class BrowserController : MonoBehaviour
         }
 
     }
-    
-    public void GoToPage(GameObject page)
+
+    public void LoadPage(GameObject page)
     {
-        if (page == null || page == currentPage) return;
-
-        if (currentPage != null)
+        StartCoroutine(GoToPage(page));
+    }
+    
+    private IEnumerator GoToPage(GameObject page, bool fast = false)
+    {
+        if (!fast)
         {
-            currentPage.SetActive(false);
-            backStack.Push(currentPage);
+            OSManager.Instance.SetLoading(true);
+            var delay = UnityEngine.Random.Range(1.0f, 2.5f);
+            if (UnityEngine.Random.Range(0.0F, 1.0F) < 0.05F)
+            {
+                delay *= 5.0F;
+            }
+            yield return new WaitForSeconds(delay);
+            OSManager.Instance.SetLoading(false);
         }
-        forwardStack.Clear();
+        if (!(page == null || page == currentPage))
+        {
+            if (currentPage != null)
+            {
+                currentPage.SetActive(false);
+                backStack.Push(currentPage);
+            }
+            forwardStack.Clear();
 
-        currentPage = page;
-        currentPage.SetActive(true);
+            currentPage = page;
+            currentPage.SetActive(true);
+        }
+
     }
 
     public void Back()
