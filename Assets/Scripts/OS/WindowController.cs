@@ -22,7 +22,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private CanvasGroup canvasGroup;
     private bool isDragging = false;
 
-    private OSWindow window;
+    public OSWindow window;
 
     public void SetOSWindow(OSWindow window)
     {
@@ -105,6 +105,12 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             canvasGroup.alpha = 1f; 
             canvasGroup.blocksRaycasts = true; 
         }
+    }
+
+    public void OnFocus()
+    {
+        // OSManager.Instance.FocusWindow(this);
+        transform.SetAsLastSibling();
     }
 
     private void CloseWindow()
