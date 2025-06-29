@@ -15,16 +15,16 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnCPUDeath()
     {
+        // Game loss stuff here
     }
 
     IEnumerator SpawnEnemies()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1.0F);
+            yield return new WaitForSeconds(5.0F);
             var dir = new Vector3
             {
                 x = Random.Range(-1.0F, 1.0F),
