@@ -17,7 +17,7 @@ public class TimeManager : MonoBehaviour
 
     [SerializeField] private Light globalLight;
 
-    [SerializeField] private int hours = 5;
+    private int hours = 5;
 
     public int Hours
     { 
@@ -25,7 +25,7 @@ public class TimeManager : MonoBehaviour
         set { hours = value; OnHoursChange(value); } 
     }
 
-    [SerializeField] private int days;
+    private int days;
 
     public int Days
     { 
@@ -33,8 +33,8 @@ public class TimeManager : MonoBehaviour
         set { days = value; } 
     }
 
-    [SerializeField] private float tempSecond;
-    float lerpSpeed = 2f;
+    private float tempSecond;
+    float lerpSpeed = 10f;
 
     public void Update()
     {
