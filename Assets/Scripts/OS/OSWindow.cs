@@ -28,4 +28,5 @@ public enum WindowSize
     Medium,
     Large,
     Special,
+    Folder
 }
