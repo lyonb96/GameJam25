@@ -1,21 +1,22 @@
 using UnityEngine;
 using UnityEngine.EventSystems; 
 using UnityEngine.UI; 
-using TMPro; // Required for TextMeshPro
+using TMPro; 
+using System.Linq;
+using System.Threading.Tasks;
+using UnityEditor.UI;
 
 public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Tooltip("The height of the area at the top that serves as the drag handle.")]
     public float dragHandleHeight = 25f;
 
-    [Header("Taskbar")]
-    public GameObject taskbarPrefab;
-    public TaskBar taskBar;
-
     // Component references
     private Button closeButton;
-    private Sprite icon;
+    private Image icon;
     private TextMeshProUGUI title;
+    private GameObject panel;
+    public BarProgram task;
 
     // Transform and Canvas references
     private RectTransform rectTransform;
@@ -24,8 +25,43 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private CanvasGroup canvasGroup;
     private bool isDragging = false;
 
+    // Sprites
+    public Sprite WinBarActive;
+    public Sprite WinBarInactive;
+    private Image winBar;
+
+    public OSWindow window;
+
+    public void SetOSWindow(OSWindow window)
+    {
+        this.window = window;
+        title.SetText(window.Title);
+        icon.sprite = window.Icon;
+        // TODO: instantiate window content
+        var windowContent = Instantiate(window.Content, panel.transform);
+        if (windowContent.TryGetComponent<RectTransform>(out var tf))
+        {
+            tf.anchorMin = Vector2.zero;
+            tf.anchorMax = Vector2.one;
+            tf.sizeDelta = Vector2.zero;
+            tf.pivot = Vector2.one / 2.0F;
+            tf.position = Vector3.zero;
+            tf.localScale = Vector3.one;
+            tf.offsetMax = Vector3.zero;
+            tf.offsetMin = Vector3.zero;
+        }
+    }
+
     private void Awake()
     {
+        winBar = transform.Find("WinBar").gameObject.GetComponent<Image>();
+        title = GetComponentInChildren<TextMeshProUGUI>();
+        icon = GetComponentsInChildren<Image>()
+            .First(i => i.name == "Icon");
+        panel = GetComponentsInChildren<CanvasRenderer>()
+            .First(i => i.name == "Panel")
+            .gameObject;
+
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasRectTransform = canvas.GetComponent<RectTransform>();
@@ -36,21 +72,17 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
 
         // Auto-fetch UI elements from children
-        if (closeButton == null)
-        {
-            Transform buttonTransform = transform.Find("CloseButton");
-            if (buttonTransform != null)
-            {
-                closeButton = buttonTransform.GetComponent<Button>();
-            }
-        }
+        closeButton = GetComponentInChildren<Button>();
         closeButton.onClick.AddListener(CloseWindow);
+
+
 
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         isDragging = false;
+        OnFocus();
 
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
         {
@@ -87,8 +119,30 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
     }
 
+    public void Update()
+    {
+        if (transform.GetSiblingIndex() == transform.parent.childCount - 1)
+        {
+            winBar.sprite = WinBarActive;
+            task.GetComponent<BarProgram>().SetActive(true);
+        }
+        else
+        {
+            winBar.sprite = WinBarInactive;
+            task.GetComponent<BarProgram>().SetActive(false);
+        }
+    }
+
+    public void OnFocus()
+    {
+        // OSManager.Instance.FocusWindow(this);
+
+        transform.SetAsLastSibling();
+    }
+
     private void CloseWindow()
     {
+        Destroy(task);
         Destroy(gameObject);
     }
 

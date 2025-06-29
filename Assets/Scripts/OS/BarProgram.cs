@@ -1,16 +1,35 @@
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class BarProgram : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public TaskBar taskbar;
+    public Sprite ImActive;
+    public Sprite ImInactive;
+    public WindowController window;
+
+    public void SetActive(bool active)
     {
-        
+        if (active)
+        {
+            transform.GetComponent<Image>().sprite = ImActive;
+        }
+        else
+        {
+            transform.GetComponent<Image>().sprite = ImInactive;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClick()
     {
-        
+        window.OnFocus();
+    }
+
+
+    void OnDestroy()
+    {
+        taskbar.RemoveProgram(gameObject);
+        Destroy(gameObject);
     }
 }
