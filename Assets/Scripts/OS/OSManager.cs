@@ -92,7 +92,7 @@ public class OSManager : MonoBehaviour
                 WindowSize.Special => new Vector2(800, 400),
                 WindowSize.Small => new Vector2(400, 200),
                 WindowSize.Medium => new Vector2(800, 600),
-                WindowSize.Folder => new Vector2(800, 600),
+                WindowSize.Folder => new Vector2(650, 650),
                 _ => new Vector2(1250, 900),
             };
             tf.sizeDelta = windowSize;
