@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragHandleHeight: 24
+  taskPrefab: {fileID: 4743419538377134235, guid: 869df2f0c54292e49a741d470fcf99cf, type: 3}
+  taskbar: {fileID: 0}
 --- !u!114 &4675663882829221600
 MonoBehaviour:
   m_ObjectHideFlags: 0

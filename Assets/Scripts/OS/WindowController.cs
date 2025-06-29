@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems; 
 using UnityEngine.UI; 
-using TMPro; // Required for TextMeshPro
+using TMPro; 
 using System.Linq;
+using System.Threading.Tasks;
 
 public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -14,6 +15,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private Image icon;
     private TextMeshProUGUI title;
     private GameObject panel;
+    public BarProgram task;
 
     // Transform and Canvas references
     private RectTransform rectTransform;
@@ -66,6 +68,8 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         closeButton = GetComponentInChildren<Button>();
         closeButton.onClick.AddListener(CloseWindow);
 
+
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -115,6 +119,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     private void CloseWindow()
     {
+        Destroy(task);
         Destroy(gameObject);
     }
 

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using TMPro; 
+using UnityEngine.UI; 
 using UnityEngine;
 
 public class OSManager : MonoBehaviour
@@ -8,6 +10,10 @@ public class OSManager : MonoBehaviour
     public GameObject MediumWindowPrefab;
 
     public GameObject LargeWindowPrefab;
+
+    public GameObject TaskPrefab;
+
+    public TaskBar taskBar;
 
     public static OSManager Instance { get; private set; }
 
@@ -35,10 +41,15 @@ public class OSManager : MonoBehaviour
             _ => SmallWindowPrefab,
         };
         var obj = Instantiate(windowPrefab, transform.position, Quaternion.identity, transform);
+        GameObject task = Instantiate(TaskPrefab, taskBar.transform);
+        task.GetComponent<BarProgram>().taskbar = taskBar;
         if (obj.TryGetComponent<WindowController>(out var windowHandle))
         {
             windowHandle.SetOSWindow(window);
+            windowHandle.task = task.GetComponent<BarProgram>();
         }
-        // TODO: Maybe taskbar stuff if necessary
+        task.GetComponentInChildren<TextMeshProUGUI>().text = window.Title;
+        task.transform.Find("Image").GetComponent<Image>().sprite = window.Icon;
+        taskBar.AddProgram(task);
     }
 }
