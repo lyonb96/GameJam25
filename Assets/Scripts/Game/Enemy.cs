@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float MoveSpeed = 50.0F;
+    public float MoveSpeed = 200.0F;
 
     public GameManager Manager { get; private set; }
 
@@ -22,15 +22,17 @@ public class Enemy : MonoBehaviour
         tf.anchoredPosition3D = newPos;
         if (newPos.sqrMagnitude < 10000)
         {
-            Manager.CPU.Health -= 1;
+            Manager.CPU.Damage();
             Destroy(gameObject);
         }
     }
 
     public void OnClicked()
     {
-        OSManager.Instance.AddError("deez nuts");
-        Die();
+        OSManager.Instance.OpenCommandPrompt(() =>
+        {
+            Die();
+        });
     }
 
     public void Die()
