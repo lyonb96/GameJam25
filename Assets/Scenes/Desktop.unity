@@ -399,6 +399,7 @@ RectTransform:
   - {fileID: 2102124653}
   - {fileID: 2146719751}
   - {fileID: 1532554625}
+  - {fileID: 799883104}
   m_Father: {fileID: 732943925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -574,11 +575,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fbdbb322e8ced44499ed5481d31f63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SmallWindowPrefab: {fileID: 0}
-  MediumWindowPrefab: {fileID: 0}
   LargeWindowPrefab: {fileID: 508444213157626241, guid: 795e22b9b34c48747833696b533ebe70, type: 3}
+  ErrorIcon: {fileID: 21300000, guid: b7f2174bcbe1da44da81d79fa8da8822, type: 3}
+  WarningIcon: {fileID: 21300000, guid: b7f2174bcbe1da44da81d79fa8da8822, type: 3}
+  ErrorPrefab: {fileID: 3066062482993034071, guid: ccbe8286074edb84193834bd14c8f4c6, type: 3}
   TaskPrefab: {fileID: 4743419538377134235, guid: 869df2f0c54292e49a741d470fcf99cf, type: 3}
+  BlockerPrefab: {fileID: 1484974283638239215, guid: f9aeb8770e97a3b4d9870bbb879b0efd, type: 3}
   taskBar: {fileID: 645327672}
+--- !u!1 &799883103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 799883104}
+  - component: {fileID: 799883105}
+  m_Layer: 0
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &799883104
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799883103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 645327669}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -136, y: -8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &799883105
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799883103}
+  m_CullTransparentMesh: 1
 --- !u!1001 &994286660
 PrefabInstance:
   m_ObjectHideFlags: 0
