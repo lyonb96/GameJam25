@@ -29,7 +29,6 @@ public class Enemy : MonoBehaviour
 
     public void OnClicked()
     {
-        OSManager.Instance.AddError("deez nuts");
         Die();
     }
 
