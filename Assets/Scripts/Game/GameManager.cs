@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             var (enemyToSpawn, delay) = enemySpawnChance switch
             {
                 <= 0.8F => (EnemyPrefab, 1.0F),
-                <= 0.95F => (BigEnemyPrefab, 5.0F),
+                <= 0.95F => (BigEnemyPrefab, 6.0F),
                 _ => (LightningEnemyPrefab, 2.0F),
             };
             var dir = new Vector3

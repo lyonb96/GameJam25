@@ -9,6 +9,8 @@ public class CommandPrompt : MonoBehaviour
 
     private CommandLine lastCommandLine;
 
+    public string TerminateCommand { get; set; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,12 +20,18 @@ public class CommandPrompt : MonoBehaviour
 
     public void Submit(string text)
     {
-        if (text.ToLower() == "killtask")
+        if (text.ToLower() == TerminateCommand)
         {
             OSHelpers.DestroyWindow(gameObject);
         }
+        else if (TerminateCommand != null && TerminateCommand.StartsWith("sudo") && TerminateCommand.EndsWith(text.ToLower()))
+        {
+            SpawnResponse("ERROR unauthorized. Try using the 'sudo' option", true);
+            SpawnNewLine();
+        }
         else
         {
+            // TODO: Normal command handlers
             SpawnResponse("ERROR unrecognized command: " + text, true);
             SpawnNewLine();
         }

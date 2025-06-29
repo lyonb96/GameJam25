@@ -1,10 +1,16 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public float MoveSpeed = 200.0F;
+    public float MoveSpeed = 150.0F;
 
     public bool RequiresCommand;
+
+    public string ProcessId;
+
+    public bool IsElevated;
 
     public GameManager Manager { get; private set; }
 
@@ -12,6 +18,20 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         Manager = GetComponentInParent<GameManager>();
+        if (RequiresCommand)
+        {
+            IsElevated = Random.value > 0.9F;
+            if (IsElevated)
+            {
+                GetComponent<Image>().color = Color.red;
+            }
+        }
+        ProcessId = ((int)(Random.value * 10000)).ToString("00000");
+        var text = GetComponentInChildren<TextMeshProUGUI>();
+        if (text != null)
+        {
+            text.text = "PID: " + ProcessId;
+        }
     }
 
     // Update is called once per frame
@@ -33,10 +53,21 @@ public class Enemy : MonoBehaviour
     {
         if (RequiresCommand)
         {
-            OSManager.Instance.OpenCommandPrompt(() =>
+            var command = "kill " + ProcessId;
+            if (IsElevated)
             {
-                Die();
-            });
+                command = "sudo " + command;
+            }
+            OSManager.Instance.OpenCommandPrompt(
+                command,
+                gameObject,
+                () =>
+                {
+                    if (this != null)
+                    {
+                        Die();
+                    }
+                });
         }
         else
         {

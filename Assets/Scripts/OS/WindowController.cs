@@ -31,16 +31,22 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public OSWindow window;
     public GameObject blocker;
 
+    public GameObject lifespanWatcher;
+    private bool hasWatcher;
+
     public void SetOSWindow(OSWindow window)
     {
         this.window = window;
         title.SetText(window.Title);
         icon.sprite = window.Icon;
+        lifespanWatcher = window.LifespanWatcher;
+        hasWatcher = lifespanWatcher != null;
         if (!window.AllowCloseButton)
         {
             closeButton.interactable = false;
         }
         var windowContent = Instantiate(window.Content, panel.transform);
+        window.OnContentCreated?.Invoke(windowContent);
         if (windowContent.TryGetComponent<RectTransform>(out var tf))
         {
             tf.anchorMin = Vector2.zero;
@@ -122,6 +128,11 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void Update()
     {
+        if (hasWatcher && lifespanWatcher == null)
+        {
+            CloseWindow();
+            return;
+        }
         if (task == null)
         {
             return;

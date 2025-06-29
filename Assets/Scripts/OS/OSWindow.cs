@@ -16,6 +16,10 @@ public class OSWindow
     public Action OnClose { get; set; }
 
     public bool AllowCloseButton { get; set; } = true;
+
+    public GameObject LifespanWatcher { get; set; }
+
+    public Action<GameObject> OnContentCreated { get; set; }
 }
 
 public enum WindowSize
@@ -24,4 +28,5 @@ public enum WindowSize
     Medium,
     Large,
     Special,
+    Folder
 }
