@@ -801,8 +801,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LargeWindowPrefab: {fileID: 508444213157626241, guid: 795e22b9b34c48747833696b533ebe70, type: 3}
-  ErrorIcon: {fileID: 21300000, guid: b7f2174bcbe1da44da81d79fa8da8822, type: 3}
-  WarningIcon: {fileID: 21300000, guid: b7f2174bcbe1da44da81d79fa8da8822, type: 3}
+  ErrorIcon: {fileID: 21300000, guid: c14b9df7c97b1754a8d4e4a5cd28cde8, type: 3}
+  WarningIcon: {fileID: 21300000, guid: 01ed45fa3ff57fe409a21b2e96d06f30, type: 3}
   ErrorPrefab: {fileID: 3066062482993034071, guid: ccbe8286074edb84193834bd14c8f4c6, type: 3}
   TaskPrefab: {fileID: 4743419538377134235, guid: 869df2f0c54292e49a741d470fcf99cf, type: 3}
   BlockerPrefab: {fileID: 1484974283638239215, guid: f9aeb8770e97a3b4d9870bbb879b0efd, type: 3}
@@ -1031,18 +1031,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7025197841236941018}
     m_Modifications:
-    - target: {fileID: 1003152373562125323, guid: cda3619941f567f4396496230ee7d557, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1170970068873931921, guid: cda3619941f567f4396496230ee7d557, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 0a99b6cb59def38429a76953e9ed5673, type: 2}
-    - target: {fileID: 2929640277652407947, guid: cda3619941f567f4396496230ee7d557, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 16bb6ec13c462ee4e994fc8be98b7d73, type: 2}
     - target: {fileID: 3168245475780006351, guid: 8f18fbd2a17882746851df2374ce408e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1127,6 +1115,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: DesktopIcon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8956332952206510333, guid: 8f18fbd2a17882746851df2374ce408e, type: 3}
+      propertyPath: Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 763b5142586ec514a83d4d58afa98ee2, type: 3}
+    - target: {fileID: 1003152373562125323, guid: cda3619941f567f4396496230ee7d557, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170970068873931921, guid: cda3619941f567f4396496230ee7d557, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a99b6cb59def38429a76953e9ed5673, type: 2}
+    - target: {fileID: 2929640277652407947, guid: cda3619941f567f4396496230ee7d557, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 16bb6ec13c462ee4e994fc8be98b7d73, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
