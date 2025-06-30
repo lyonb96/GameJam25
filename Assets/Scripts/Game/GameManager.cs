@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
                 y = Random.Range(-1.0F, 1.0F),
                 z = 0.0F,
             }.normalized;
-            Vector3 pos = dir * 700.0F;
+            Vector3 pos = dir * 10.0F;
             var enemy = Instantiate(enemyToSpawn, transform.position + pos, Quaternion.identity, transform);
             enemies.Add(enemy);
             yield return new WaitForSeconds(delay);

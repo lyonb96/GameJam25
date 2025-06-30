@@ -483,7 +483,7 @@ Camera:
   near clip plane: 0.1
   far clip plane: 1339
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -766,6 +766,14 @@ PrefabInstance:
     - target: {fileID: 7921899045083922085, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       propertyPath: m_RenderMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921899045083922085, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921899045083922085, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: m_UpdateRectTransformForStandalone
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8169246559126837510, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       propertyPath: Title

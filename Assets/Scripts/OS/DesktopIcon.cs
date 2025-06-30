@@ -8,7 +8,7 @@ public class DesktopIcon : MonoBehaviour
 
     public Sprite Icon;
 
-    public GameObject WindowContent;
+    public GameObject WindowContent, createdWindow;
 
     public WindowSize WindowSize;
 
@@ -33,7 +33,18 @@ public class DesktopIcon : MonoBehaviour
 
     void Update()
     {
-        
+        // if (createdWindow == null)
+        // {
+        //     var found = GameObject.Find(WindowContent.name);
+        //     if (found != null)
+        //     {
+        //         createdWindow = found;
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.Log(createdWindow.transform.position);
+        // }
     }
 
     public void OnClick()
