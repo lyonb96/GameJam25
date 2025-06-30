@@ -131,7 +131,16 @@ public class GameManager : MonoBehaviour
         }
         else if (name == "KILL")
         {
-            // Do the kill shit
+            OSManager.Instance.OpenCommandPrompt(
+                "killall",
+                null,
+                () =>
+                {
+                    foreach (var enemy in enemies)
+                    {
+                        enemy.GetComponent<Enemy>().Die();
+                    }
+                });
             return true;
         }
         return true;

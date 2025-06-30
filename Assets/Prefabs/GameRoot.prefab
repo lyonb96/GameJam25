@@ -394,7 +394,7 @@ MonoBehaviour:
   DayAvailable: 3
   GameManager: {fileID: 852602455502154783}
   State: 0
-  Cooldown: 10
+  Cooldown: 35
 --- !u!114 &3893484167907349726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +518,7 @@ MonoBehaviour:
   DayAvailable: 2
   GameManager: {fileID: 852602455502154783}
   State: 0
-  Cooldown: 15
+  Cooldown: 25
 --- !u!114 &4539396394427013381
 MonoBehaviour:
   m_ObjectHideFlags: 0
