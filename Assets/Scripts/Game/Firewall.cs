@@ -3,6 +3,7 @@ using UnityEngine;
 public class Firewall : MonoBehaviour
 {
     public GameManager gameManager;
+    public Ability ability;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,6 +24,7 @@ public class Firewall : MonoBehaviour
             enemy.Die();
             Destroy(gameObject);
             gameManager.OnFirewallDead();
+            ability.StartCooldown();
         }
     }
 }
