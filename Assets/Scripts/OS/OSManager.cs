@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Linq;
 
 public class OSManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class OSManager : MonoBehaviour
     public Sprite ErrorIcon;
 
     public Sprite WarningIcon;
+
+    public Sprite InfoIcon;
 
     public Sprite CommandLineIcon;
 
@@ -22,6 +25,8 @@ public class OSManager : MonoBehaviour
     public GameObject BlockerPrefab;
 
     public GameObject CommandPromptPrefab;
+
+    public GameObject ChatNotificationPrefab;
 
     public TaskBar taskBar;
 
@@ -41,10 +46,14 @@ public class OSManager : MonoBehaviour
     public AudioClip[] keyStrokes;
     public AudioClip[] spaceStrokes;
     public AudioClip[] mouseClicks;
+    public AudioClip ErrorTone;
+    private DesktopIcon[] icons;
 
     void Start()
     {
         Instance = this;
+        icons = GetComponentsInChildren<DesktopIcon>(true);
+        Debug.Log(icons.Length);
         SetDefaultCursor();
     }
 
@@ -137,6 +146,8 @@ public class OSManager : MonoBehaviour
 
     public void AddError(string message, bool blocking = true, Action onClose = null)
     {
+        audioSource.clip = ErrorTone;
+        audioSource.Play();
         var error = Instantiate(ErrorPrefab);
         var text = error.GetComponentInChildren<TextMeshProUGUI>();
         text.text = message;
@@ -171,6 +182,29 @@ public class OSManager : MonoBehaviour
         });
     }
 
+    public void AddInfo(string message, string title = null, bool blocking = false, Action onClose = null)
+    {
+        var error = Instantiate(ErrorPrefab);
+        var text = error.GetComponentInChildren<TextMeshProUGUI>();
+        text.text = message;
+        var image = error.GetComponentInChildren<Image>();
+        image.sprite = InfoIcon;
+        SpawnWindow(new()
+        {
+            Size = WindowSize.Small,
+            Icon = InfoIcon,
+            Title = title ?? "Info",
+            Content = error,
+            IsBlocking = blocking,
+            OnClose = onClose,
+        });
+    }
+
+    public void ShowChatNotification()
+    {
+        var notif = Instantiate(ChatNotificationPrefab, transform);
+    }
+
     public void SetHovering(bool hovering)
     {
         this.hovering = hovering;
@@ -195,6 +229,11 @@ public class OSManager : MonoBehaviour
     public void SetLoadingCursor()
     {
         Cursor.SetCursor(cursorLoad, hotspot, CursorMode.Auto);
+    }
+
+    public void ShowIcon(string name)
+    {
+        icons.Single(i => i.Title == name).gameObject.SetActive(true);
     }
 
     void OnGUI()

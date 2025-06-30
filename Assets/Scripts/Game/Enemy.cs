@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         tf.anchoredPosition3D = newPos;
         if (newPos.sqrMagnitude < 10000)
         {
-            Manager.CPU.Damage(Damage);
+            Manager.CPU.Damage(gameObject, Damage);
             if (SpawnErrorOnHit)
             {
                 OSManager.Instance.AddError("Unexpected voltage surge; some system functions may have been impacted");
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         // TODO: spawn a cool effect
-        Manager.OnEnemyKilled();
+        Manager.OnEnemyKilled(gameObject);
         Destroy(gameObject);
     }
 }
