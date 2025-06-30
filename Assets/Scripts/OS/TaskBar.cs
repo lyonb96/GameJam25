@@ -11,7 +11,7 @@ public class TaskBar : MonoBehaviour
 
     // Positioning constants
     private const float startX = 0;
-    private const float programWidth = 135f;
+    private const float programWidth = 256.0F;
     private const float spacing = 5;
     private const float yPos = 0f;
 
