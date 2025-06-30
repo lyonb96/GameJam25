@@ -23,10 +23,18 @@ public class Ability : MonoBehaviour
         var cdObject = transform.Find("CooldownBar");
         CooldownImage = cdObject.GetComponent<Image>();
         CooldownImage.gameObject.SetActive(false);
-        if (NarrativeScript.Instance.Day < DayAvailable)
+        if(NarrativeScript.Instance != null)
         {
-            // Hide this if not available yet
-            gameObject.SetActive(false);
+            if (NarrativeScript.Instance.Day < DayAvailable)
+            {
+                // Hide this if not available yet
+                gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            // If NarrativeScript is not available, assume it's always available
+            gameObject.SetActive(true);
         }
     }
 
