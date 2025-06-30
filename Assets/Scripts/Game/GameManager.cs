@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
                 z = 0.0F,
             }.normalized;
             Vector3 pos = dir * 10.0F;
-            var enemy = Instantiate(enemyToSpawn, transform.position + pos, Quaternion.identity, transform);
+            var enemy = Instantiate(enemyToSpawn, transform.position + pos, Quaternion.identity, Background.transform);
             enemies.Add(enemy);
             yield return new WaitForSeconds(delay);
         }
