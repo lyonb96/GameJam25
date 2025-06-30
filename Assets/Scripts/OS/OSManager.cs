@@ -35,6 +35,7 @@ public class OSManager : MonoBehaviour
     private bool hovering;
     private bool loading;
     public Vector2 hotspot = Vector2.zero;
+    public Vector2 centerHotspot = Vector2.zero;
 
     public AudioSource audioSource;
     public AudioClip[] keyStrokes;
@@ -187,7 +188,8 @@ public class OSManager : MonoBehaviour
 
     public void SetHoverCursor()
     {
-        Cursor.SetCursor(cursorHover, hotspot, CursorMode.Auto);
+        centerHotspot = new Vector2(cursorHover.width / 4, 0);
+        Cursor.SetCursor(cursorHover, centerHotspot, CursorMode.Auto);
     }
 
     public void SetLoadingCursor()
