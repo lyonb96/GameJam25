@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 986953481201060773}
   - component: {fileID: 4246266042565912360}
   - component: {fileID: 5539289899309487203}
+  - component: {fileID: 852602455502154783}
   m_Layer: 5
   m_Name: GameArea
   m_TagString: Untagged
@@ -60,6 +61,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &852602455502154783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476988222704997072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b52a1d9e475b544db470f886ced358f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyPrefab: {fileID: 4121831374287103319, guid: 0e9b2d570111f24428a09f23457824c5, type: 3}
+  BigEnemyPrefab: {fileID: 1029390269707996133, guid: afa51205811353b4caaf0587609c7eeb, type: 3}
+  LightningEnemyPrefab: {fileID: 1029390269707996133, guid: afa51205811353b4caaf0587609c7eeb, type: 3}
+  Background: {fileID: 300098049767828605}
 --- !u!1 &1010189050491367725
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +185,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2743590012063608132}
   - component: {fileID: 7208451761910189393}
-  - component: {fileID: 5051355924797679289}
   - component: {fileID: 6192546811821417949}
   m_Layer: 5
   m_Name: GameRoot
@@ -206,22 +222,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3487852160414967640}
   m_CullTransparentMesh: 1
---- !u!114 &5051355924797679289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487852160414967640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b52a1d9e475b544db470f886ced358f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 4121831374287103319, guid: 0e9b2d570111f24428a09f23457824c5, type: 3}
-  BigEnemyPrefab: {fileID: 1029390269707996133, guid: afa51205811353b4caaf0587609c7eeb, type: 3}
-  LightningEnemyPrefab: {fileID: 1029390269707996133, guid: afa51205811353b4caaf0587609c7eeb, type: 3}
-  Background: {fileID: 300098049767828605}
 --- !u!114 &6192546811821417949
 MonoBehaviour:
   m_ObjectHideFlags: 0
