@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7924493199204967916}
   - component: {fileID: 5565953447009550949}
   - component: {fileID: 1647518402898529306}
+  - component: {fileID: 1248604779324659468}
   m_Layer: 5
   m_Name: Firewall
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8eefcb5731db8024a9749908b2b4e2b3, type: 3}
+  m_Sprite: {fileID: 15441691, guid: 674905903650bf3459427dd08b74b84f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  ability: {fileID: 0}
 --- !u!58 &1647518402898529306
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -126,3 +128,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 150
+--- !u!95 &1248604779324659468
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9080195114459253179}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 912699ad5e324184a9a0e22ae00107a6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
