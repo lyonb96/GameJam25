@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Linq;
 
 public class OSManager : MonoBehaviour
 {
@@ -45,10 +46,13 @@ public class OSManager : MonoBehaviour
     public AudioClip[] spaceStrokes;
     public AudioClip[] mouseClicks;
     public AudioClip ErrorTone;
+    private DesktopIcon[] icons;
 
     void Start()
     {
         Instance = this;
+        icons = GetComponentsInChildren<DesktopIcon>(true);
+        Debug.Log(icons.Length);
         SetDefaultCursor();
     }
 
@@ -223,6 +227,11 @@ public class OSManager : MonoBehaviour
     public void SetLoadingCursor()
     {
         Cursor.SetCursor(cursorLoad, hotspot, CursorMode.Auto);
+    }
+
+    public void ShowIcon(string name)
+    {
+        icons.Single(i => i.Title == name).gameObject.SetActive(true);
     }
 
     void OnGUI()
