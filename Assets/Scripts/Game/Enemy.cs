@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         var tf = transform as RectTransform;
         var currentPos = tf.anchoredPosition3D;
         var dirToZero = (Vector3.zero - currentPos).normalized;
-        var newPos = currentPos + (MoveSpeed * Time.deltaTime * dirToZero);
+        var newPos = currentPos + (MoveSpeed * Manager.SpeedMult * Time.deltaTime * dirToZero);
         tf.anchoredPosition3D = newPos;
         if (newPos.sqrMagnitude < 10000)
         {

@@ -21,6 +21,11 @@ public class NarrativeScript : MonoBehaviour
     void Start()
     {
         Instance = this;
+        Continue();
+    }
+
+    public void Continue()
+    {
         Func<IEnumerator> routine = Day switch
         {
             1 => RunDayOne,
@@ -141,7 +146,7 @@ public class NarrativeScript : MonoBehaviour
                 },
             },
         });
-        yield return new WaitForSeconds(10.0F);
+        yield return new WaitForSeconds(2.0F);
         OSManager.Instance.ShowChatNotification();
         yield return new WaitForSeconds(20.0F);
         OSManager.Instance.AddWarning("Virus incursion detected! Head to the Antivirus Trainer 2.0 application to repel the attack.");
@@ -180,7 +185,7 @@ public class NarrativeScript : MonoBehaviour
                 Message = "*Message deleted by system*",
             },
         };
-        yield return new WaitForSeconds(10.0F);
+        yield return new WaitForSeconds(2.0F);
         OSManager.Instance.ShowChatNotification();
         yield return new WaitForSeconds(20.0F);
         OSManager.Instance.AddWarning("Virus incursion detected! Head to the Antivirus Trainer 2.0 application to repel the attack.");
@@ -210,8 +215,14 @@ public class NarrativeScript : MonoBehaviour
                 Message = "Also I wanted to let you know that the company has allotted for you to be able to have tomorrow off thanks to your excellent work these past few days. Happy new year! Who knows what it will bring...",
             },
         };
-        yield return new WaitForSeconds(10.0F);
+        yield return new WaitForSeconds(2.0F);
         OSManager.Instance.ShowChatNotification();
+        yield return new WaitUntil(() => gameStarted);
+        gameStarted = false;
+        yield return new WaitUntil(() => gameLost);
+        gameLost = false;
+        OSManager.Instance.AddInfo("Virus offensive capabilities verified. Deploying worldwide virus. Happy New Millenium.");
+        OSManager.Instance.FadeToCredits();
     }
 
     public void OnAxiChatOpened()

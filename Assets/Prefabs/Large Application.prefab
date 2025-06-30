@@ -97,6 +97,7 @@ MonoBehaviour:
   WinBarActive: {fileID: 21300000, guid: 8ec45f5adde2f4849ad04a9d06c98f8e, type: 3}
   WinBarInactive: {fileID: 21300000, guid: 63ed354d1df23764682df43adc363888, type: 3}
   blocker: {fileID: 0}
+  lifespanWatcher: {fileID: 0}
 --- !u!114 &4675663882829221600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 44, y: 0}
-  m_SizeDelta: {x: 179.2104, y: 32}
+  m_SizeDelta: {x: 550, y: 32}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3068200937089319235
 CanvasRenderer:

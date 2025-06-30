@@ -17,6 +17,10 @@ public class ChatPreview : MonoBehaviour
     {
         senderText.text = chat.Person;
         previewText.text = chat.Messages.LastOrDefault()?.Message;
+        if (previewText.text.Length > 60)
+        {
+            previewText.text = previewText.text[..57] + "...";
+        }
     }
 
     public void OnClick()
