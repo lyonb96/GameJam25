@@ -81,7 +81,7 @@ public class NarrativeScript : MonoBehaviour
         axiChatOpened = false;
         yield return new WaitForSeconds(6.0F);
         OSManager.Instance.AddWarning("Virus incursion detected! Head to the Antivirus Trainer 2.0 application to repel the attack.");
-        OSManager.Instance.ShowIcon("Axion Antivirus Trainer 2.0");
+        OSManager.Instance.ShowIcon("Antivirus Trainer 2.0");
         yield return new WaitUntil(() => gameStarted);
         gameStarted = false;
         yield return new WaitUntil(() => gameWon);
@@ -98,7 +98,7 @@ public class NarrativeScript : MonoBehaviour
         managerChat.Messages.Add(new()
         {
             Sender = "Manager",
-            Message = "Glad to see yesterday wasn�t too hard on you, some new information has come up about what to expect today on top of yesterday's additions. The PC can now utilize the Selection Box- Drag on the screen to create an area of damage against the viruses, helpful for dealing with groups, but keep in mind the size of your boxes, the bigger the box the less damage it will do.",
+            Message = "Glad to see yesterday wasn't too hard on you, some new information has come up about what to expect today on top of yesterday's additions. The PC can now utilize the Selection Box- Drag on the screen to create an area of damage against the viruses, helpful for dealing with groups, but keep in mind the size of your boxes, the bigger the box the less damage it will do.",
         });
         managerChat.Messages.Add(new()
         {
@@ -118,12 +118,12 @@ public class NarrativeScript : MonoBehaviour
                 new()
                 {
                     Sender = "AX-PLOX-1",
-                    Message = "Hello, nice to see some fresh blood around here, hopefully we don�t end up scaring you off. I know you�ve been here for a few days already but have you gotten the feeling that something is off? Something doesn�t seem right about the mail and viruses being spread throughout the company this widely and quickly"
+                    Message = "Hello, nice to see some fresh blood around here, hopefully we don't end up scaring you off. I know you've been here for a few days already but have you gotten the feeling that something is off? Something doesn't seem right about the mail and viruses being spread throughout the company this widely and quickly"
                 },
                 new()
                 {
                     Sender = "AX-PLOX-1",
-                    Message = "I�m not sure but I think the people working at this company are in great danger of something we cannot understand yet. Please keep your eyes weary, if not for us then for yourself.",
+                    Message = "I'm not sure but I think the people working at this company are in great danger of something we cannot understand yet. Please keep your eyes weary, if not for us then for yourself.",
                 },
             },
         });

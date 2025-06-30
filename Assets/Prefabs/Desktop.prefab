@@ -2189,10 +2189,10 @@ PrefabInstance:
     - target: {fileID: 8956332952206510333, guid: 8f18fbd2a17882746851df2374ce408e, type: 3}
       propertyPath: Icon
       value: 
-      objectReference: {fileID: 21300000, guid: 2413f33196717894bb357d7d3d7074c0, type: 3}
+      objectReference: {fileID: 21300000, guid: 5cd230314fc5c794baad79101baaace1, type: 3}
     - target: {fileID: 8956332952206510333, guid: 8f18fbd2a17882746851df2374ce408e, type: 3}
       propertyPath: Title
-      value: Axion Antivirus Trainer 2.0
+      value: Antivirus Trainer 2.0
       objectReference: {fileID: 0}
     - target: {fileID: 8956332952206510333, guid: 8f18fbd2a17882746851df2374ce408e, type: 3}
       propertyPath: WindowContent

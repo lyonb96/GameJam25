@@ -10,6 +10,8 @@ public class Ability : MonoBehaviour
 
     public AbilityState State = AbilityState.Ready;
 
+    public float Cooldown;
+
     void Start()
     {
         if (NarrativeScript.Instance.Day < DayAvailable)
@@ -21,6 +23,15 @@ public class Ability : MonoBehaviour
 
     public void OnClick()
     {
-        GameManager.ActivateAbility(AbilityName);
+        var startCd = GameManager.ActivateAbility(AbilityName, this);
+        if (startCd)
+        {
+            StartCooldown();
+        }
+    }
+
+    public void StartCooldown()
+    {
+
     }
 }

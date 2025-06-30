@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI; 
 using TMPro; 
 using System.Linq;
+using Unity.VisualScripting;
 
 public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -30,12 +31,20 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public OSWindow window;
     public GameObject blocker;
+    public GameObject lifespanWatcher;
+    private bool hasWatcher;
 
     public void SetOSWindow(OSWindow window)
     {
         this.window = window;
         title.SetText(window.Title);
         icon.sprite = window.Icon;
+        lifespanWatcher = window.LifespanWatcher;
+        hasWatcher = lifespanWatcher != null;
+        if (!window.AllowCloseButton)
+        {
+            closeButton.interactable = false;
+        }
         var windowContent = Instantiate(window.Content, panel.transform);
         window.OnContentCreated?.Invoke(windowContent);
         if (windowContent.TryGetComponent<RectTransform>(out var tf))
@@ -73,9 +82,6 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         // Auto-fetch UI elements from children
         closeButton = GetComponentInChildren<Button>();
         closeButton.onClick.AddListener(CloseWindow);
-
-
-
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -120,6 +126,11 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void Update()
     {
+        if (hasWatcher && lifespanWatcher == null)
+        {
+            CloseWindow();
+            return;
+        }
         if (task == null)
         {
             return;
@@ -149,6 +160,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         {
             Destroy(blocker);
         }
+        window.OnClose?.Invoke();
         Destroy(task);
         Destroy(gameObject);
     }

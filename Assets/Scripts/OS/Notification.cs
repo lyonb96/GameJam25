@@ -11,7 +11,7 @@ public class Notification : MonoBehaviour
 
     public IEnumerator Run()
     {
-        yield return new WaitForSeconds(10.0F);
+        yield return new WaitForSeconds(5.0F);
         transform.DOMoveY(-160.0F, 0.75F).OnComplete(() => Destroy(gameObject));
     }
 }
