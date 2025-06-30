@@ -15,7 +15,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject LightningEnemyPrefab;
 
+    public GameObject FirewallPrefab;
+
     public Image Background;
+
+    public float SpeedMult { get; private set; } = 1.0F;
 
     public int Score { get; set; }
 
@@ -88,4 +92,46 @@ public class GameManager : MonoBehaviour
         NarrativeScript.Instance.OnGameWon();
         Debug.Log("On game won called");
     }
+
+    public void ActivateAbility(string name)
+    {
+        if (name == "Firewall")
+        {
+            ActivateFirewallAbility();
+        }
+        else if (name == "Ice")
+        {
+            StartCoroutine(ActivateIceAbility());
+        }
+        else if (name == "KILL")
+        {
+            // Do the kill shit
+        }
+    }
+
+    IEnumerator ActivateIceAbility()
+    {
+        SpeedMult = 0.5F;
+        yield return new WaitForSeconds(5.0F);
+        SpeedMult = 1.0F;
+    }
+
+    public void ActivateFirewallAbility()
+    {
+        var firewall = Instantiate(FirewallPrefab, transform);
+        var firewallComp = firewall.GetComponent<Firewall>();
+        firewallComp.gameManager = this;
+    }
+
+    public void OnFirewallDead()
+    {
+        // Start the cooldown
+    }
+}
+
+public enum AbilityState
+{
+    Ready,
+    Active,
+    OnCooldown,
 }
