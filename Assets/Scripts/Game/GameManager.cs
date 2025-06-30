@@ -46,7 +46,17 @@ public class GameManager : MonoBehaviour
 
     public void OnCPUDeath()
     {
-        // Game loss stuff here
+        NarrativeScript.Instance.OnGameLost();
+        if (NarrativeScript.Instance.Day < 4)
+        {
+            OSManager.Instance.AddError(
+                "Your performance has been deemed inadequate. You have been terminated from your position at Axion Technologies.",
+                true,
+                () =>
+                {
+                    OSManager.Instance.ShutDown();
+                });
+        }
     }
 
     public void OnEnemyKilled(GameObject enemy)

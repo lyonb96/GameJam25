@@ -255,13 +255,24 @@ public class OSManager : MonoBehaviour
 
         blackScreen.gameObject.SetActive(true);
         blackScreen.transform.SetAsLastSibling();
-        blackScreen.color = new Color(0, 0, 0, 0); 
+        blackScreen.color = new Color(0, 0, 0, 0);
 
         yield return blackScreen.DOFade(1f, 1.5f).WaitForCompletion();
         yield return new WaitForSeconds(2.0f);
         yield return blackScreen.DOFade(0f, 1.5f).WaitForCompletion();
         blackScreen.gameObject.SetActive(false);
         NarrativeScript.Instance.Continue();
+    }
+
+    public void FadeToCredits()
+    {
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.transform.SetAsLastSibling();
+        blackScreen.color = new Color(0, 0, 0, 0);
+        blackScreen.DOFade(1.0F, 5.0F).OnComplete(() =>
+        {
+            // TODO: Run the credits video
+        });
     }
 
     public void ShowIcon(string name)
