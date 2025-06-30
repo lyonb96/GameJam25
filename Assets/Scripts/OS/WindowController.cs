@@ -37,6 +37,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         title.SetText(window.Title);
         icon.sprite = window.Icon;
         var windowContent = Instantiate(window.Content, panel.transform);
+        window.OnContentCreated?.Invoke(windowContent);
         if (windowContent.TryGetComponent<RectTransform>(out var tf))
         {
             tf.anchorMin = Vector2.zero;
