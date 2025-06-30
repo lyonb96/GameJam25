@@ -242,6 +242,7 @@ public class OSManager : MonoBehaviour
 
     private IEnumerator ShutdownRoutine()
     {
+        NarrativeScript.Instance.OnLoggedOff();
         var openWindows = GetComponentsInChildren<WindowController>()
             .OrderByDescending(w => w.transform.GetSiblingIndex())
             .ToArray();
@@ -258,9 +259,9 @@ public class OSManager : MonoBehaviour
 
         yield return blackScreen.DOFade(1f, 1.5f).WaitForCompletion();
         yield return new WaitForSeconds(2.0f);
-        NarrativeScript.Instance.OnLoggedOff();
         yield return blackScreen.DOFade(0f, 1.5f).WaitForCompletion();
         blackScreen.gameObject.SetActive(false);
+        NarrativeScript.Instance.Continue();
     }
 
     public void ShowIcon(string name)

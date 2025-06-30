@@ -21,6 +21,11 @@ public class NarrativeScript : MonoBehaviour
     void Start()
     {
         Instance = this;
+        Continue();
+    }
+
+    public void Continue()
+    {
         Func<IEnumerator> routine = Day switch
         {
             1 => RunDayOne,

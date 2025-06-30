@@ -61,27 +61,41 @@ public class GameManager : MonoBehaviour
         var startTime = Time.time;
         var duration = day switch
         {
-            1 => 10.0F,
-            2 => 120.0F,
-            3 => 150.0F,
+            1 => 30.0F,
+            2 => 60.0F,
+            3 => 90.0F,
             _ => 10000000.0F,
+        };
+        var mult = day switch
+        {
+            1 => 1.25F,
+            2 => 1.1F,
+            3 => 1.0F,
+            _ => 1.0F,
         };
         while (startTime + duration > Time.time)
         {
+            var timeSinceStart = Time.time - startTime;
+            if (day >= 4 && timeSinceStart > 60.0F)
+            {
+                var after = timeSinceStart - 60.0F;
+                mult = Mathf.Clamp(1.0F - after / 180.0F, 0.0F, 1.0F);
+            }
             var enemySpawnChance = Random.Range(0.0F, 1.0F);
             var (enemyToSpawn, delay) = enemySpawnChance switch
             {
-                <= 0.85F => (EnemyPrefab, 1.0F),
-                <= 0.95F => (BigEnemyPrefab, 6.0F),
-                _ => (LightningEnemyPrefab, 2.0F),
+                <= 0.9F => (EnemyPrefab, 1.0F),
+                _ => (BigEnemyPrefab, 7.0F),
+                // _ => (LightningEnemyPrefab, 7.0F),
             };
+            delay *= mult;
             var dir = new Vector3
             {
                 x = Random.Range(-1.0F, 1.0F),
                 y = Random.Range(-1.0F, 1.0F),
                 z = 0.0F,
             }.normalized;
-            Vector3 pos = dir * 600.0F;
+            Vector3 pos = dir * 700.0F;
             var enemy = Instantiate(enemyToSpawn, transform.position + pos, Quaternion.identity, transform);
             enemies.Add(enemy);
             yield return new WaitForSeconds(delay);
