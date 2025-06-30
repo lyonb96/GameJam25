@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             var enemySpawnChance = Random.Range(0.0F, 1.0F);
             var (enemyToSpawn, delay) = enemySpawnChance switch
             {
-                <= 0.8F => (EnemyPrefab, 1.0F),
+                <= 0.85F => (EnemyPrefab, 1.0F),
                 <= 0.95F => (BigEnemyPrefab, 6.0F),
                 _ => (LightningEnemyPrefab, 2.0F),
             };
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
                 y = Random.Range(-1.0F, 1.0F),
                 z = 0.0F,
             }.normalized;
-            Vector3 pos = dir * 800.0F;
+            Vector3 pos = dir * 600.0F;
             Instantiate(enemyToSpawn, transform.position + pos, Quaternion.identity, transform);
             yield return new WaitForSeconds(delay);
         }
