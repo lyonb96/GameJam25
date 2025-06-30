@@ -1236,54 +1236,6 @@ PrefabInstance:
       propertyPath: WindowContent
       value: 
       objectReference: {fileID: 1497702745886218164, guid: 6e21616c91133704c9c810b270410aa9, type: 3}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: cursor
-      value: 
-      objectReference: {fileID: 2800000, guid: 8c6ea5b3c82936b4bbec16ecd012b7e8, type: 3}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: cursorLoad
-      value: 
-      objectReference: {fileID: 2800000, guid: 8ad56c7faefd58a4fab9def63a73a185, type: 3}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 572403748}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: cursorHover
-      value: 
-      objectReference: {fileID: 2800000, guid: 69e74803e6a29a24ba12f8bd46f25206, type: 3}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: keyStrokes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: mouseClicks.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: spaceStrokes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: 'keyStrokes.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 79d651081d01efa41b1ffdfb522747ef, type: 3}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: 'keyStrokes.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 8a35cb95c159f494b87132da841cd0b8, type: 3}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: 'keyStrokes.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 0407346b29fb581438ab132073cd9d53, type: 3}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: 'mouseClicks.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 90bda482c84d3f94fa11b0f7e438f76d, type: 3}
-    - target: {fileID: 1350979039629740856, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
-      propertyPath: 'spaceStrokes.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: eb0487a15cc66eb4489ca2337235cfbf, type: 3}
     - target: {fileID: 2801917718753198132, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -673
@@ -1303,6 +1255,10 @@ PrefabInstance:
     - target: {fileID: 6078355182718865774, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 356
+      objectReference: {fileID: 0}
+    - target: {fileID: 6849737549376398101, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7025197841236941018, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       propertyPath: m_Pivot.x
