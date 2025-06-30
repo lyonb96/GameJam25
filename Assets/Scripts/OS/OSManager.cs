@@ -58,7 +58,6 @@ public class OSManager : MonoBehaviour
         blackScreen.gameObject.SetActive(false);
         Instance = this;
         icons = GetComponentsInChildren<DesktopIcon>(true);
-        Debug.Log(icons.Length);
         SetDefaultCursor();
     }
 
