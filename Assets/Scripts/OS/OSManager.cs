@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Linq;
+using DG.Tweening;
+
 
 public class OSManager : MonoBehaviour
 {
@@ -29,6 +32,8 @@ public class OSManager : MonoBehaviour
 
     public TaskBar taskBar;
 
+    public Image blackScreen;
+
     public static OSManager Instance { get; private set; }
 
     private List<OSWindow> Windows { get; set; } = new();
@@ -39,16 +44,21 @@ public class OSManager : MonoBehaviour
     private bool hovering;
     private bool loading;
     public Vector2 hotspot = Vector2.zero;
+    public Vector2 centerHotspot = Vector2.zero;
 
     public AudioSource audioSource;
     public AudioClip[] keyStrokes;
     public AudioClip[] spaceStrokes;
     public AudioClip[] mouseClicks;
     public AudioClip ErrorTone;
+    private DesktopIcon[] icons;
 
     void Start()
     {
+        blackScreen.gameObject.SetActive(false);
         Instance = this;
+        icons = GetComponentsInChildren<DesktopIcon>(true);
+        Debug.Log(icons.Length);
         SetDefaultCursor();
     }
 
@@ -217,12 +227,46 @@ public class OSManager : MonoBehaviour
 
     public void SetHoverCursor()
     {
-        Cursor.SetCursor(cursorHover, hotspot, CursorMode.Auto);
+        centerHotspot = new Vector2(cursorHover.width / 4, 0);
+        Cursor.SetCursor(cursorHover, centerHotspot, CursorMode.Auto);
     }
 
     public void SetLoadingCursor()
     {
         Cursor.SetCursor(cursorLoad, hotspot, CursorMode.Auto);
+    }
+
+    public void ShutDown()
+    {
+        StartCoroutine(ShutdownRoutine());
+    }
+
+    private IEnumerator ShutdownRoutine()
+    {
+        var openWindows = GetComponentsInChildren<WindowController>()
+            .OrderByDescending(w => w.transform.GetSiblingIndex())
+            .ToArray();
+
+        foreach (var window in openWindows)
+        {
+            window.CloseWindow();
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.05f, 0.3f));
+        }
+
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.transform.SetAsLastSibling();
+        blackScreen.color = new Color(0, 0, 0, 0); 
+
+        yield return blackScreen.DOFade(1f, 1.5f).WaitForCompletion();
+        yield return new WaitForSeconds(2.0f);
+        NarrativeScript.Instance.OnLoggedOff();
+        yield return blackScreen.DOFade(0f, 1.5f).WaitForCompletion();
+        blackScreen.gameObject.SetActive(false);
+    }
+
+    public void ShowIcon(string name)
+    {
+        icons.Single(i => i.Title == name).gameObject.SetActive(true);
     }
 
     void OnGUI()
