@@ -61,8 +61,8 @@ public class UtilityManager : MonoBehaviour
     {
         // Logic to start the game, e.g., loading the main scene
         Debug.Log("Starting game...");
-        SceneManager.LoadScene("Desktop"); // Uncomment when using Unity's SceneManager
-        audioManager.PlayLoopingClip(audioClips.GetClip("Ambient")); // Ensure you have a clip named "MainTheme"
+        SceneManager.LoadScene("World"); // Uncomment when using Unity's SceneManager
+        // audioManager.PlayLoopingClip(audioClips.GetClip("Ambient")); // Ensure you have a clip named "MainTheme"
     }
     
 }
