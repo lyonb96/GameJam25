@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         // TODO: spawn a cool effect
-        Manager.OnEnemyKilled();
+        Manager.OnEnemyKilled(gameObject);
         Destroy(gameObject);
     }
 }

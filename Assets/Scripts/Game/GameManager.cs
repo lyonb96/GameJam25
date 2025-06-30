@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -18,9 +19,12 @@ public class GameManager : MonoBehaviour
 
     public int Score { get; set; }
 
+    private List<GameObject> enemies = new();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        NarrativeScript.Instance.OnGameStarted();
         CPU = GetComponentInChildren<CPUControl>();
         StartCoroutine(SpawnEnemies());
     }
@@ -40,14 +44,24 @@ public class GameManager : MonoBehaviour
         // Game loss stuff here
     }
 
-    public void OnEnemyKilled()
+    public void OnEnemyKilled(GameObject enemy)
     {
         Score += 1;
+        enemies.Remove(enemy);
     }
 
     IEnumerator SpawnEnemies()
     {
-        while (true)
+        var day = NarrativeScript.Instance.Day;
+        var startTime = Time.time;
+        var duration = day switch
+        {
+            1 => 180.0F,
+            2 => 240.0F,
+            3 => 300.0F,
+            _ => 10000000.0F,
+        };
+        while (startTime + duration < Time.time)
         {
             var enemySpawnChance = Random.Range(0.0F, 1.0F);
             var (enemyToSpawn, delay) = enemySpawnChance switch
@@ -63,8 +77,11 @@ public class GameManager : MonoBehaviour
                 z = 0.0F,
             }.normalized;
             Vector3 pos = dir * 600.0F;
-            Instantiate(enemyToSpawn, transform.position + pos, Quaternion.identity, transform);
+            var enemy = Instantiate(enemyToSpawn, transform.position + pos, Quaternion.identity, transform);
+            enemies.Add(enemy);
             yield return new WaitForSeconds(delay);
         }
+        yield return new WaitUntil(() => enemies.Count == 0);
+        NarrativeScript.Instance.OnGameWon();
     }
 }

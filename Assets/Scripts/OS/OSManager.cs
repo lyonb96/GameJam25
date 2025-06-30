@@ -13,6 +13,8 @@ public class OSManager : MonoBehaviour
 
     public Sprite WarningIcon;
 
+    public Sprite InfoIcon;
+
     public Sprite CommandLineIcon;
 
     public GameObject ErrorPrefab;
@@ -22,6 +24,8 @@ public class OSManager : MonoBehaviour
     public GameObject BlockerPrefab;
 
     public GameObject CommandPromptPrefab;
+
+    public GameObject ChatNotificationPrefab;
 
     public TaskBar taskBar;
 
@@ -168,6 +172,29 @@ public class OSManager : MonoBehaviour
             IsBlocking = blocking,
             OnClose = onClose,
         });
+    }
+
+    public void AddInfo(string message, string title = null, bool blocking = false, Action onClose = null)
+    {
+        var error = Instantiate(ErrorPrefab);
+        var text = error.GetComponentInChildren<TextMeshProUGUI>();
+        text.text = message;
+        var image = error.GetComponentInChildren<Image>();
+        image.sprite = InfoIcon;
+        SpawnWindow(new()
+        {
+            Size = WindowSize.Small,
+            Icon = InfoIcon,
+            Title = title ?? "Info",
+            Content = error,
+            IsBlocking = blocking,
+            OnClose = onClose,
+        });
+    }
+
+    public void ShowChatNotification()
+    {
+        var notif = Instantiate(ChatNotificationPrefab, transform);
     }
 
     public void SetHovering(bool hovering)

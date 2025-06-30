@@ -9,7 +9,7 @@ public class AxiChatController : MonoBehaviour
 
     private ChatArea chatArea;
 
-    public List<Chat> Chats { get; private set; } = new()
+    public static List<Chat> Chats { get; set; } = new()
     {
         new()
         {
@@ -50,6 +50,7 @@ public class AxiChatController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        NarrativeScript.Instance.OnAxiChatOpened();
         chatPreviews = GetComponentInChildren<ChatPreviews>();
         chatPreviews.controller = this;
         chatPreviews.SpawnChats();
