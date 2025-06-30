@@ -1299,7 +1299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8093474855059872602
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1374,7 +1374,6 @@ GameObject:
   - component: {fileID: 3314294220022369936}
   - component: {fileID: 4558855484467412590}
   - component: {fileID: 2182993869018019020}
-  - component: {fileID: 6743865675859607778}
   - component: {fileID: 7439618750905395031}
   - component: {fileID: 5496428358309140043}
   m_Layer: 0
@@ -1502,7 +1501,7 @@ MonoBehaviour:
   cursorLoad: {fileID: 2800000, guid: 5abdf3b4b5a5d4e43b011ea510b4d795, type: 3}
   hotspot: {x: 0, y: 0}
   centerHotspot: {x: 0, y: 0}
-  audioSource: {fileID: 6743865675859607778}
+  audioSource: {fileID: 7439618750905395031}
   keyStrokes:
   - {fileID: 8300000, guid: 79d651081d01efa41b1ffdfb522747ef, type: 3}
   - {fileID: 8300000, guid: 8a35cb95c159f494b87132da841cd0b8, type: 3}
@@ -1672,6 +1671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df849ed70eea274697a9fabf9911e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pp: 0
 --- !u!1001 &4811494447929635492
 PrefabInstance:
   m_ObjectHideFlags: 0
