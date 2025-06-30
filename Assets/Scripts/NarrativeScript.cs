@@ -9,6 +9,8 @@ public class NarrativeScript : MonoBehaviour
 
     public int Day { get; private set; } = 1;
 
+    public int pp = 0;
+
     private bool axiChatOpened;
     private bool gameStarted;
     private bool gameWon;
@@ -40,22 +42,22 @@ public class NarrativeScript : MonoBehaviour
                     new()
                     {
                         Sender = "Manager",
-                        Message = "Your 1st day is starting soon! I wanted to reach out to you about the abilities and threats you’ll need to know about. You’ll have access to an ability called Firewall- Drag a firewall application from the desktop to spawn a fiery shield to defend the CPU for 2 hits.",
+                        Message = "Your 1st day is starting soon! I wanted to reach out to you about the abilities and threats youï¿½ll need to know about. Youï¿½ll have access to an ability called Firewall- Drag a firewall application from the desktop to spawn a fiery shield to defend the CPU for 2 hits.",
                     },
                     new()
                     {
                         Sender = "Manager",
-                        Message = "Viruses are attacking the CPU, you’ll have to click them with your cursor to destroy them and prevent them from damaging the CPU.",
+                        Message = "Viruses are attacking the CPU, youï¿½ll have to click them with your cursor to destroy them and prevent them from damaging the CPU.",
                     },
                     new()
                     {
                         Sender = "Manager",
-                        Message = "Be careful however there is a known Voltage Surge affecting company computers. Lightning bolts are quickly attacking the CPU, they don’t do damage but will mess up the PC’s graphics temporarily if not destroyed.",
+                        Message = "Be careful however there is a known Voltage Surge affecting company computers. Lightning bolts are quickly attacking the CPU, they donï¿½t do damage but will mess up the PCï¿½s graphics temporarily if not destroyed.",
                     },
                     new()
                     {
                         Sender = "Manager",
-                        Message = "If you have any additional questions or forget about the information above you can come back to this chat or check the ‘howTo’ folder in your first day folder.",
+                        Message = "If you have any additional questions or forget about the information above you can come back to this chat or check the ï¿½howToï¿½ folder in your first day folder.",
                     },
                 },
             },
@@ -96,7 +98,7 @@ public class NarrativeScript : MonoBehaviour
         managerChat.Messages.Add(new()
         {
             Sender = "Manager",
-            Message = "Glad to see yesterday wasn’t too hard on you, some new information has come up about what to expect today on top of yesterday's additions. The PC can now utilize the Selection Box- Drag on the screen to create an area of damage against the viruses, helpful for dealing with groups, but keep in mind the size of your boxes, the bigger the box the less damage it will do.",
+            Message = "Glad to see yesterday wasnï¿½t too hard on you, some new information has come up about what to expect today on top of yesterday's additions. The PC can now utilize the Selection Box- Drag on the screen to create an area of damage against the viruses, helpful for dealing with groups, but keep in mind the size of your boxes, the bigger the box the less damage it will do.",
         });
         managerChat.Messages.Add(new()
         {
@@ -116,12 +118,12 @@ public class NarrativeScript : MonoBehaviour
                 new()
                 {
                     Sender = "AX-PLOX-1",
-                    Message = "Hello, nice to see some fresh blood around here, hopefully we don’t end up scaring you off. I know you’ve been here for a few days already but have you gotten the feeling that something is off? Something doesn’t seem right about the mail and viruses being spread throughout the company this widely and quickly"
+                    Message = "Hello, nice to see some fresh blood around here, hopefully we donï¿½t end up scaring you off. I know youï¿½ve been here for a few days already but have you gotten the feeling that something is off? Something doesnï¿½t seem right about the mail and viruses being spread throughout the company this widely and quickly"
                 },
                 new()
                 {
                     Sender = "AX-PLOX-1",
-                    Message = "I’m not sure but I think the people working at this company are in great danger of something we cannot understand yet. Please keep your eyes weary, if not for us then for yourself.",
+                    Message = "Iï¿½m not sure but I think the people working at this company are in great danger of something we cannot understand yet. Please keep your eyes weary, if not for us then for yourself.",
                 },
             },
         });
