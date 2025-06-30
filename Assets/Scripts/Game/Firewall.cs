@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Firewall : MonoBehaviour
 {
+    public GameManager gameManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +21,8 @@ public class Firewall : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Enemy>(out var enemy))
         {
             enemy.Die();
+            Destroy(gameObject);
+            gameManager.OnFirewallDead();
         }
     }
 }
