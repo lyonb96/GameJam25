@@ -24,13 +24,14 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        StartCoroutine(SpawnEnemies());
         NarrativeScript.Instance.OnGameStarted();
         CPU = GetComponentInChildren<CPUControl>();
-        StartCoroutine(SpawnEnemies());
     }
 
-    public void OnCPUDamaged()
+    public void OnCPUDamaged(GameObject damager)
     {
+        enemies.Remove(damager);
         Background.DOColor(Color.pink, 0.25F).OnComplete(() => Background.DOColor(Color.white, 0.25F));
         DOTween.Shake(
             () => CPU.transform.position,
@@ -56,12 +57,12 @@ public class GameManager : MonoBehaviour
         var startTime = Time.time;
         var duration = day switch
         {
-            1 => 180.0F,
-            2 => 240.0F,
-            3 => 300.0F,
+            1 => 10.0F,
+            2 => 120.0F,
+            3 => 150.0F,
             _ => 10000000.0F,
         };
-        while (startTime + duration < Time.time)
+        while (startTime + duration > Time.time)
         {
             var enemySpawnChance = Random.Range(0.0F, 1.0F);
             var (enemyToSpawn, delay) = enemySpawnChance switch
@@ -81,7 +82,10 @@ public class GameManager : MonoBehaviour
             enemies.Add(enemy);
             yield return new WaitForSeconds(delay);
         }
+        Debug.Log("Done killing enemies, waiting for enemy count now");
         yield return new WaitUntil(() => enemies.Count == 0);
+        Debug.Log("Enemy count is done");
         NarrativeScript.Instance.OnGameWon();
+        Debug.Log("On game won called");
     }
 }

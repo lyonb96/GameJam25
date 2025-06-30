@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class NarrativeScript : MonoBehaviour
@@ -11,6 +12,7 @@ public class NarrativeScript : MonoBehaviour
     private bool axiChatOpened;
     private bool gameStarted;
     private bool gameWon;
+    private bool loggedOff;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -70,22 +72,68 @@ public class NarrativeScript : MonoBehaviour
                 },
             },
         };
-        yield return new WaitForSeconds(3.0F);
+        yield return new WaitForSeconds(2.0F);
         OSManager.Instance.ShowChatNotification();
         yield return new WaitUntil(() => axiChatOpened);
         axiChatOpened = false;
         yield return new WaitForSeconds(20.0F);
-        OSManager.Instance.AddWarning("Virus incursion detected! Head to the Antivirus Trainer 1.0 application to repel the attack.");
+        OSManager.Instance.AddWarning("Virus incursion detected! Head to the Antivirus Trainer 2.0 application to repel the attack.");
         yield return new WaitUntil(() => gameStarted);
         gameStarted = false;
         yield return new WaitUntil(() => gameWon);
         gameWon = false;
         OSManager.Instance.AddInfo("Congratulations, you successfully repelled the virus incursion.");
+        yield return new WaitUntil(() => loggedOff);
+        Day += 1;
     }
 
     public IEnumerator RunDayTwo()
     {
-        yield return new WaitForSeconds(1.0F);
+        var chats = AxiChatController.Chats;
+        var managerChat = chats.Single(x => x.Person == "Manager");
+        managerChat.Messages.Add(new()
+        {
+            Sender = "Manager",
+            Message = "Glad to see yesterday wasn’t too hard on you, some new information has come up about what to expect today on top of yesterday's additions. The PC can now utilize the Selection Box- Drag on the screen to create an area of damage against the viruses, helpful for dealing with groups, but keep in mind the size of your boxes, the bigger the box the less damage it will do.",
+        });
+        managerChat.Messages.Add(new()
+        {
+            Sender = "Manager",
+            Message = "Cloaked Viruses are attacking the systems! Use your Spacebar to see them but be careful, the charge is limited. Use it too often you might get snuck up on!",
+        });
+        managerChat.Messages.Add(new()
+        {
+            Sender = "Manager",
+            Message = "The viruses have utilized the keyboards for a Typing Test! Enemies will appear with a string of characters on them, click on them and use the keyboard to type out their phrases exactly to eradicate them!",
+        });
+        chats.Add(new()
+        {
+            Person = "AX-PLOX-1",
+            Messages = new()
+            {
+                new()
+                {
+                    Sender = "AX-PLOX-1",
+                    Message = "Hello, nice to see some fresh blood around here, hopefully we don’t end up scaring you off. I know you’ve been here for a few days already but have you gotten the feeling that something is off? Something doesn’t seem right about the mail and viruses being spread throughout the company this widely and quickly"
+                },
+                new()
+                {
+                    Sender = "AX-PLOX-1",
+                    Message = "I’m not sure but I think the people working at this company are in great danger of something we cannot understand yet. Please keep your eyes weary, if not for us then for yourself.",
+                },
+            },
+        });
+        yield return new WaitForSeconds(2.0F);
+        OSManager.Instance.ShowChatNotification();
+        yield return new WaitForSeconds(20.0F);
+        OSManager.Instance.AddWarning("Virus incursion detected! Head to the Antivirus Trainer 2.0 application to repel the attack.");
+        yield return new WaitUntil(() => gameStarted);
+        gameStarted = false;
+        yield return new WaitUntil(() => gameWon);
+        gameWon = false;
+        OSManager.Instance.AddInfo("Congratulations, you successfully repelled the virus incursion.");
+        yield return new WaitUntil(() => loggedOff);
+        Day += 1;
     }
 
     public IEnumerator RunDayThree()
@@ -105,11 +153,16 @@ public class NarrativeScript : MonoBehaviour
 
     public void OnGameStarted()
     {
-
+        gameStarted = true;
     }
 
     public void OnGameWon()
     {
+        gameWon = true;
+    }
 
+    public void OnLoggedOff()
+    {
+        loggedOff = true;
     }
 }

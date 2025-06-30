@@ -763,6 +763,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &572403756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572403739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df849ed70eea274697a9fabf9911e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &800689612 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3168245475780006351, guid: 8f18fbd2a17882746851df2374ce408e, type: 3}
@@ -1415,6 +1427,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8585614083947178166, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 572403748}
+    - targetCorrespondingSourceObject: {fileID: 8585614083947178166, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 572403756}
   m_SourcePrefab: {fileID: 100100000, guid: 04fb10b81d5980946aebccd3e5c36fe7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
