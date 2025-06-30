@@ -11,6 +11,7 @@ public class UtilityManager : MonoBehaviour
     [Header("UTILITY MANAGER")]
     public static UtilityManager UM;
     public GameObject PostProcessing;
+    AudioClips audioClips;
 
 
     [HideInInspector] public float SFXVolumeModifier = 1;
@@ -30,6 +31,11 @@ public class UtilityManager : MonoBehaviour
     {
         PostProcessing = GameObject.Find("PostProcessing");
         audioManager = GetComponent<AudioManager>();
+        if (audioManager == null)
+        {
+            audioManager = gameObject.AddComponent<AudioManager>();
+        }
+        audioClips = GetComponent<AudioClips>();
     }
 
     void Update()
@@ -56,6 +62,7 @@ public class UtilityManager : MonoBehaviour
         // Logic to start the game, e.g., loading the main scene
         Debug.Log("Starting game...");
         SceneManager.LoadScene("Desktop"); // Uncomment when using Unity's SceneManager
+        audioManager.PlayLoopingClip(audioClips.GetClip("Ambient")); // Ensure you have a clip named "MainTheme"
     }
     
 }
