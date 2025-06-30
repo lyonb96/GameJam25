@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnEnemies());
-        NarrativeScript.Instance?.OnGameStarted();
+        NarrativeScript.Instance.OnGameStarted();
         CPU = GetComponentInChildren<CPUControl>();
     }
 
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        var day = NarrativeScript.Instance?.Day;
+        var day = NarrativeScript.Instance.Day;
         var startTime = Time.time;
         var duration = day switch
         {
