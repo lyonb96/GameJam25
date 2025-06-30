@@ -74,10 +74,12 @@ public class NarrativeScript : MonoBehaviour
         };
         yield return new WaitForSeconds(2.0F);
         OSManager.Instance.ShowChatNotification();
+        OSManager.Instance.ShowIcon("AxiChat");
         yield return new WaitUntil(() => axiChatOpened);
         axiChatOpened = false;
         yield return new WaitForSeconds(20.0F);
         OSManager.Instance.AddWarning("Virus incursion detected! Head to the Antivirus Trainer 2.0 application to repel the attack.");
+        OSManager.Instance.ShowIcon("Axion Antivirus Trainer 2.0");
         yield return new WaitUntil(() => gameStarted);
         gameStarted = false;
         yield return new WaitUntil(() => gameWon);

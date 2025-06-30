@@ -44,17 +44,21 @@ public class OSManager : MonoBehaviour
     private bool hovering;
     private bool loading;
     public Vector2 hotspot = Vector2.zero;
+    public Vector2 centerHotspot = Vector2.zero;
 
     public AudioSource audioSource;
     public AudioClip[] keyStrokes;
     public AudioClip[] spaceStrokes;
     public AudioClip[] mouseClicks;
     public AudioClip ErrorTone;
+    private DesktopIcon[] icons;
 
     void Start()
     {
         blackScreen.gameObject.SetActive(false);
         Instance = this;
+        icons = GetComponentsInChildren<DesktopIcon>(true);
+        Debug.Log(icons.Length);
         SetDefaultCursor();
     }
 
@@ -223,7 +227,8 @@ public class OSManager : MonoBehaviour
 
     public void SetHoverCursor()
     {
-        Cursor.SetCursor(cursorHover, hotspot, CursorMode.Auto);
+        centerHotspot = new Vector2(cursorHover.width / 4, 0);
+        Cursor.SetCursor(cursorHover, centerHotspot, CursorMode.Auto);
     }
 
     public void SetLoadingCursor()
@@ -257,6 +262,11 @@ public class OSManager : MonoBehaviour
         NarrativeScript.Instance.OnLoggedOff();
         yield return blackScreen.DOFade(0f, 1.5f).WaitForCompletion();
         blackScreen.gameObject.SetActive(false);
+    }
+
+    public void ShowIcon(string name)
+    {
+        icons.Single(i => i.Title == name).gameObject.SetActive(true);
     }
 
     void OnGUI()
