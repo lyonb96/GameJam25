@@ -13,6 +13,8 @@ public class OSManager : MonoBehaviour
 
     public Sprite WarningIcon;
 
+    public Sprite InfoIcon;
+
     public Sprite CommandLineIcon;
 
     public GameObject ErrorPrefab;
@@ -22,6 +24,8 @@ public class OSManager : MonoBehaviour
     public GameObject BlockerPrefab;
 
     public GameObject CommandPromptPrefab;
+
+    public GameObject ChatNotificationPrefab;
 
     public TaskBar taskBar;
 
@@ -36,14 +40,18 @@ public class OSManager : MonoBehaviour
     private bool loading;
     public Vector2 hotspot = Vector2.zero;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public AudioSource audioSource;
+    public AudioClip[] keyStrokes;
+    public AudioClip[] spaceStrokes;
+    public AudioClip[] mouseClicks;
+    public AudioClip ErrorTone;
+
     void Start()
     {
         Instance = this;
         SetDefaultCursor();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (loading)
@@ -133,6 +141,8 @@ public class OSManager : MonoBehaviour
 
     public void AddError(string message, bool blocking = true, Action onClose = null)
     {
+        audioSource.clip = ErrorTone;
+        audioSource.Play();
         var error = Instantiate(ErrorPrefab);
         var text = error.GetComponentInChildren<TextMeshProUGUI>();
         text.text = message;
@@ -167,6 +177,29 @@ public class OSManager : MonoBehaviour
         });
     }
 
+    public void AddInfo(string message, string title = null, bool blocking = false, Action onClose = null)
+    {
+        var error = Instantiate(ErrorPrefab);
+        var text = error.GetComponentInChildren<TextMeshProUGUI>();
+        text.text = message;
+        var image = error.GetComponentInChildren<Image>();
+        image.sprite = InfoIcon;
+        SpawnWindow(new()
+        {
+            Size = WindowSize.Small,
+            Icon = InfoIcon,
+            Title = title ?? "Info",
+            Content = error,
+            IsBlocking = blocking,
+            OnClose = onClose,
+        });
+    }
+
+    public void ShowChatNotification()
+    {
+        var notif = Instantiate(ChatNotificationPrefab, transform);
+    }
+
     public void SetHovering(bool hovering)
     {
         this.hovering = hovering;
@@ -190,5 +223,39 @@ public class OSManager : MonoBehaviour
     public void SetLoadingCursor()
     {
         Cursor.SetCursor(cursorLoad, hotspot, CursorMode.Auto);
+    }
+
+    void OnGUI()
+    {
+        Event e = Event.current;
+
+        // Handle mouse clicks for audio feedback
+        if (e.type == EventType.MouseDown && (e.button == 0 || e.button == 1))
+        {
+            if (mouseClicks != null && mouseClicks.Length > 0)
+            {
+                audioSource.clip = mouseClicks[UnityEngine.Random.Range(0, mouseClicks.Length)];
+                audioSource.Play();
+            }
+        }
+        // Handle key presses for audio feedback
+        else if (e.type == EventType.KeyDown)
+        {
+            if (e.keyCode == KeyCode.None) return; // Do not play sound for modifier keys like Shift, Ctrl, etc.
+
+            if (e.keyCode == KeyCode.Space)
+            {
+                if (spaceStrokes != null && spaceStrokes.Length > 0)
+                {
+                    audioSource.clip = spaceStrokes[UnityEngine.Random.Range(0, spaceStrokes.Length)];
+                    audioSource.Play();
+                }
+            }
+            else if (keyStrokes != null && keyStrokes.Length > 0)
+            {
+                audioSource.clip = keyStrokes[UnityEngine.Random.Range(0, keyStrokes.Length)];
+                audioSource.Play();
+            }
+        }
     }
 }

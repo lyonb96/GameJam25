@@ -16,7 +16,7 @@ public class ChatPreviews : MonoBehaviour
 
     public void SpawnChats()
     {
-        foreach (var chat in controller.Chats)
+        foreach (var chat in AxiChatController.Chats)
         {
             var previewInstance = Instantiate(PreviewPrefab, transform);
             var previewController = previewInstance.GetComponent<ChatPreview>();
