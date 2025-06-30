@@ -1572,16 +1572,21 @@ MonoBehaviour:
   ChatNotificationPrefab: {fileID: 755677202762586953, guid: 6e12212d6662dfd40a199169a4cd45fb, type: 3}
   taskBar: {fileID: 4113578711971106951}
   blackScreen: {fileID: 4363758272625902994}
-  cursor: {fileID: 0}
-  cursorHover: {fileID: 0}
-  cursorLoad: {fileID: 0}
+  cursor: {fileID: 2800000, guid: a78811401326685498a34bb518945997, type: 3}
+  cursorHover: {fileID: 2800000, guid: 1b5d05ef1839cd649a85adbc1e6bcc72, type: 3}
+  cursorLoad: {fileID: 2800000, guid: 5abdf3b4b5a5d4e43b011ea510b4d795, type: 3}
   hotspot: {x: 0, y: 0}
   centerHotspot: {x: 0, y: 0}
   audioSource: {fileID: 7439618750905395031}
-  keyStrokes: []
-  spaceStrokes: []
-  mouseClicks: []
-  ErrorTone: {fileID: 0}
+  keyStrokes:
+  - {fileID: 8300000, guid: 79d651081d01efa41b1ffdfb522747ef, type: 3}
+  - {fileID: 8300000, guid: 8a35cb95c159f494b87132da841cd0b8, type: 3}
+  - {fileID: 8300000, guid: 0407346b29fb581438ab132073cd9d53, type: 3}
+  spaceStrokes:
+  - {fileID: 8300000, guid: eb0487a15cc66eb4489ca2337235cfbf, type: 3}
+  mouseClicks:
+  - {fileID: 8300000, guid: 90bda482c84d3f94fa11b0f7e438f76d, type: 3}
+  ErrorTone: {fileID: 8300000, guid: be8b934368418d441a7e9f2982947673, type: 3}
 --- !u!114 &3314294220022369936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1742,6 +1747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df849ed70eea274697a9fabf9911e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pp: 0
 --- !u!1001 &4811494447929635492
 PrefabInstance:
   m_ObjectHideFlags: 0
