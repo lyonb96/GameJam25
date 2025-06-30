@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Uncomment if using Unity's SceneManager
 
 public class UtilityManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class UtilityManager : MonoBehaviour
     void Start()
     {
         PostProcessing = GameObject.Find("PostProcessing");
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        audioManager = GetComponent<AudioManager>();
     }
 
     void Update()
@@ -42,6 +43,19 @@ public class UtilityManager : MonoBehaviour
     public void PlayGlobalClip(Clip clip)
     {
         audioManager.PlayClip(clip);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("Game is exiting...");
+    }
+
+    public void StartGame()
+    {
+        // Logic to start the game, e.g., loading the main scene
+        Debug.Log("Starting game...");
+        SceneManager.LoadScene("Desktop"); // Uncomment when using Unity's SceneManager
     }
     
 }
