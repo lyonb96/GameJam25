@@ -109,7 +109,7 @@ public class OSManager : MonoBehaviour
             {
                 WindowSize.Special => new Vector2(800, 400),
                 WindowSize.Small => new Vector2(650, 260),
-                WindowSize.Folder => new Vector2(800, 600),
+                WindowSize.Folder => new Vector2(650, 600),
                 WindowSize.Medium => new Vector2(1000, 720),
                 _ => new Vector2(1250, 900),
             };

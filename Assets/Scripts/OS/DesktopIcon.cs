@@ -19,7 +19,6 @@ public class DesktopIcon : MonoBehaviour
     [Tooltip("If this is a text file, the image to display in the window.")]
     public Sprite TextImage;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         IconImage = GetComponent<Image>();
@@ -28,12 +27,10 @@ public class DesktopIcon : MonoBehaviour
         DesktopText.text = Title;
         if (TextImage != null)
         {
-            // Get the child content
-            WindowContent.transform.GetChild(1).GetComponent<Image>().sprite = TextImage;
+            // WindowContent.transform.Find("Content").GetComponent<Image>().sprite = TextImage;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         

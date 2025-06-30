@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7982550962840915544}
   - component: {fileID: 7310685997824294833}
   m_Layer: 0
-  m_Name: Notepad
+  m_Name: Bug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c98bc0ce32adce349a5be3907bed14a5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7f7d9411ad2f33c4f93b1b1469501230, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
