@@ -40,6 +40,7 @@ public class OSManager : MonoBehaviour
     public AudioClip[] keyStrokes;
     public AudioClip[] spaceStrokes;
     public AudioClip[] mouseClicks;
+    public AudioClip ErrorTone;
 
     void Start()
     {
@@ -136,6 +137,8 @@ public class OSManager : MonoBehaviour
 
     public void AddError(string message, bool blocking = true, Action onClose = null)
     {
+        audioSource.clip = ErrorTone;
+        audioSource.Play();
         var error = Instantiate(ErrorPrefab);
         var text = error.GetComponentInChildren<TextMeshProUGUI>();
         text.text = message;
