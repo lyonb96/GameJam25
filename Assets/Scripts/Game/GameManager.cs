@@ -93,6 +93,22 @@ public class GameManager : MonoBehaviour
         Debug.Log("On game won called");
     }
 
+    public void ActivateAbility(string name)
+    {
+        if (name == "Firewall")
+        {
+            ActivateFirewallAbility();
+        }
+        else if (name == "Ice")
+        {
+            StartCoroutine(ActivateIceAbility());
+        }
+        else if (name == "KILL")
+        {
+            // Do the kill shit
+        }
+    }
+
     IEnumerator ActivateIceAbility()
     {
         SpeedMult = 0.5F;
