@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7982550962840915544}
   - component: {fileID: 7310685997824294833}
   m_Layer: 0
-  m_Name: Notepad
+  m_Name: NoteWelcome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

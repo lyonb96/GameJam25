@@ -93,20 +93,24 @@ public class GameManager : MonoBehaviour
         Debug.Log("On game won called");
     }
 
-    public void ActivateAbility(string name)
+    public bool ActivateAbility(string name, Ability script)
     {
         if (name == "Firewall")
         {
-            ActivateFirewallAbility();
+            ActivateFirewallAbility(script);
+            return false;
         }
         else if (name == "Ice")
         {
             StartCoroutine(ActivateIceAbility());
+            return true;
         }
         else if (name == "KILL")
         {
             // Do the kill shit
+            return true;
         }
+        return true;
     }
 
     IEnumerator ActivateIceAbility()
@@ -116,11 +120,12 @@ public class GameManager : MonoBehaviour
         SpeedMult = 1.0F;
     }
 
-    public void ActivateFirewallAbility()
+    public void ActivateFirewallAbility(Ability script)
     {
         var firewall = Instantiate(FirewallPrefab, transform);
         var firewallComp = firewall.GetComponent<Firewall>();
         firewallComp.gameManager = this;
+        firewallComp.ability = script;
     }
 
     public void OnFirewallDead()
