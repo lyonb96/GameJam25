@@ -48,6 +48,11 @@ public class GameManager : MonoBehaviour
     public void OnCPUDeath()
     {
         NarrativeScript.Instance.OnGameLost();
+        foreach (var enemy in enemies.ToArray())
+        {
+            enemy.GetComponent<Enemy>().Die();
+        }
+        StopAllCoroutines();
         if (NarrativeScript.Instance.Day < 4)
         {
             OSManager.Instance.AddError(

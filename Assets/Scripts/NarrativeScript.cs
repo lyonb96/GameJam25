@@ -256,7 +256,7 @@ public class NarrativeScript : MonoBehaviour
         yield return new WaitUntil(() => gameLost);
         gameLost = false;
         CanLaunchGame = false;
-        OSManager.Instance.AddInfo("Virus offensive capabilities verified. Deploying worldwide virus. Happy New Millenium.");
+        OSManager.Instance.AddInfo("Virus offensive capabilities verified. Deploying worldwide virus. Thank you for participating in the Axion Virus Training Initiative. Happy New Millenium.");
         OSManager.Instance.FadeToCredits();
     }
 
