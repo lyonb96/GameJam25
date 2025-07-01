@@ -33,6 +33,7 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public GameObject blocker;
     public GameObject lifespanWatcher;
     private bool hasWatcher;
+    public bool IsClosing { get; private set; } = false;
 
     public void SetOSWindow(OSWindow window)
     {
@@ -156,13 +157,14 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void CloseWindow()
     {
+        IsClosing = true;
         if (blocker != null)
         {
             Destroy(blocker);
         }
-        window.OnClose?.Invoke();
         Destroy(task);
         Destroy(gameObject);
+        window.OnClose?.Invoke();
     }
 
     private void ClampToScreen()
