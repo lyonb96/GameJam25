@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -83,6 +84,24 @@ public class GameManager : MonoBehaviour
             3 => 1.0F,
             _ => 1.0F,
         };
+        List<(GameObject, float)> enemySet = day switch
+        {
+            1 => new() { (EnemyPrefab, 1.0F) },
+            2 => new() { (EnemyPrefab, 0.9F), (BigEnemyPrefab, 1.0F) },
+            3 => new() { (EnemyPrefab, 0.85F), (BigEnemyPrefab, 1.0F) },
+            _ => new() { (EnemyPrefab, 0.85F), (BigEnemyPrefab, 1.0F) },
+        };
+        (GameObject, float) RollSpawn()
+        {
+            var roll = Random.value;
+            var enemyToSpawn = enemySet.First(e => roll < e.Item2).Item1;
+            var delay = 1.0F;
+            if (enemyToSpawn == BigEnemyPrefab)
+            {
+                delay = 7.0F;
+            }
+            return (enemyToSpawn, delay);
+        }
         while (startTime + duration > Time.time)
         {
             var timeSinceStart = Time.time - startTime;
@@ -91,13 +110,7 @@ public class GameManager : MonoBehaviour
                 var after = timeSinceStart - 60.0F;
                 mult = Mathf.Clamp(1.0F - after / 180.0F, 0.0F, 1.0F);
             }
-            var enemySpawnChance = Random.Range(0.0F, 1.0F);
-            var (enemyToSpawn, delay) = enemySpawnChance switch
-            {
-                <= 0.9F => (EnemyPrefab, 1.0F),
-                _ => (BigEnemyPrefab, 7.0F),
-                // _ => (LightningEnemyPrefab, 7.0F),
-            };
+            var (enemyToSpawn, delay) = RollSpawn();
             delay *= mult;
             var dir = new Vector3
             {
@@ -136,7 +149,7 @@ public class GameManager : MonoBehaviour
                 null,
                 () =>
                 {
-                    foreach (var enemy in enemies)
+                    foreach (var enemy in enemies.ToArray())
                     {
                         enemy.GetComponent<Enemy>().Die();
                     }
