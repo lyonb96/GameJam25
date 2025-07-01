@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
         Manager = GetComponentInParent<GameManager>();
         if (RequiresCommand)
         {
-            IsElevated = Random.value > 0.9F;
+            IsElevated = NarrativeScript.Instance.Day > 2 && Random.value > 0.8F;
             if (IsElevated)
             {
                 GetComponent<Image>().color = Color.red;

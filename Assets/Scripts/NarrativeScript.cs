@@ -104,6 +104,7 @@ public class NarrativeScript : MonoBehaviour
         CanLaunchGame = false;
         OSManager.Instance.AddInfo("Congratulations, you successfully repelled the virus incursion. Feel free to log off when you are done for the day.");
         yield return new WaitUntil(() => loggedOff);
+        pp += 2;
         Day += 1;
     }
 
@@ -151,6 +152,24 @@ public class NarrativeScript : MonoBehaviour
                 },
             },
         });
+        chats.Add(new()
+        {
+            Person = "Axion Rewards",
+            Messages = new()
+            {
+                new()
+                {
+                    Sender = "Axion Rewards",
+                    Message = "Hello, Axion Employee! You earned PP - also known as Performance Points, Axion's internal corporate currency - for completing your training."
+                },
+
+                new()
+                {
+                    Sender = "Axion Rewards",
+                    Message = "Head to your web browser and visit the AxiRewards page to roll for rewards!"
+                }
+            }
+        });
         yield return new WaitForSeconds(2.0F);
         OSManager.Instance.ShowChatNotification();
         yield return new WaitForSeconds(20.0F);
@@ -161,9 +180,10 @@ public class NarrativeScript : MonoBehaviour
         yield return new WaitUntil(() => gameWon);
         gameWon = false;
         CanLaunchGame = false;
-        OSManager.Instance.AddInfo("Congratulations, you successfully repelled the virus incursion.");
+        OSManager.Instance.AddInfo("Congratulations, you successfully repelled the virus incursion. Feel free to log off when you are done for the day.");
         yield return new WaitUntil(() => loggedOff);
         Day += 1;
+        pp += 2;
     }
 
     public IEnumerator RunDayThree()
@@ -207,9 +227,10 @@ public class NarrativeScript : MonoBehaviour
         yield return new WaitUntil(() => gameWon);
         gameWon = false;
         CanLaunchGame = false;
-        OSManager.Instance.AddInfo("Congratulations, you successfully repelled the virus incursion.");
+        OSManager.Instance.AddInfo("Congratulations, you successfully repelled the virus incursion. Feel free to log off when you are done for the day.");
         yield return new WaitUntil(() => loggedOff);
         Day += 1;
+        pp += 2;
     }
 
     public IEnumerator RunDayFour()
