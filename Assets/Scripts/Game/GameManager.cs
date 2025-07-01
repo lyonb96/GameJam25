@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             () => CPU.transform.position,
             v => CPU.transform.position = v,
             0.5F,
-            Vector3.one * 10.0F);
+            Vector3.one * 0.25F);
     }
 
     public void OnCPUDeath()

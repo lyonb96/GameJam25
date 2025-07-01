@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CPUControl : MonoBehaviour
 {
-    public int Health { get; set; } = 3;
+    public int Health { get; set; } = 5;
 
     public TextMeshProUGUI HealthText { get; private set; }
 
