@@ -281,6 +281,8 @@ public class OSManager : MonoBehaviour
         blackScreen.DOFade(1.0F, 5.0F).OnComplete(() =>
         {
             var creditsPlayer = GameObject.Find("OverlayUI").GetComponent<CreditsPlayer>();
+            var game = GameObject.Find("GameRoot").GetComponent<AudioSource>();
+            game.Stop();
             creditsPlayer.PlayVideo();
         });
     }

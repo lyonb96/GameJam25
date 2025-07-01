@@ -40,10 +40,10 @@ public class UtilityManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        // {
+        //     Application.Quit();
+        // }
     }
 
     public void PlayGlobalClip(Clip clip)

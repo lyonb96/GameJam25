@@ -38,10 +38,10 @@ public class TimeManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            IncrementHour();
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     IncrementHour();
+        // }
     }
 
     public void SetTime(int hour)
