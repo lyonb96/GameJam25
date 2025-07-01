@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Tooltip("The height of the area at the top that serves as the drag handle.")]
-    public float dragHandleHeight = 25f;
+    public float dragHandleHeight = 45f;
 
     // Component references
     private Button closeButton;
@@ -85,6 +85,8 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         closeButton.onClick.AddListener(CloseWindow);
     }
 
+    private Vector2 dragOffset;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         isDragging = false;
@@ -97,6 +99,10 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                 isDragging = true;
                 canvasGroup.alpha = 0.9f;
                 canvasGroup.blocksRaycasts = false;
+
+                // Calculate offset between mouse and rectTransform position
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out Vector3 globalMousePos);
+                dragOffset = rectTransform.position - globalMousePos;
             }
             else
             {
@@ -110,8 +116,11 @@ public class WindowController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         if (isDragging)
         {
-            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-            ClampToScreen();
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out Vector3 globalMousePos))
+            {
+                rectTransform.position = globalMousePos + (Vector3)dragOffset;
+                ClampToScreen();
+            }
         }
     }
 

@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6664d11f13ff49841acefef879577853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragHandleHeight: 24
+  dragHandleHeight: 42
   task: {fileID: 0}
   WinBarActive: {fileID: 21300000, guid: 8ec45f5adde2f4849ad04a9d06c98f8e, type: 3}
   WinBarInactive: {fileID: 21300000, guid: 63ed354d1df23764682df43adc363888, type: 3}

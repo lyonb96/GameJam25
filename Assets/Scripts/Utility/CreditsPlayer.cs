@@ -15,13 +15,6 @@ public class CreditsPlayer : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayVideo();
-        }
-    }
 
     bool isPrepared = false;
 
@@ -34,13 +27,10 @@ public class CreditsPlayer : MonoBehaviour
 
     public void PlayVideo()
     {
-        if (isPrepared)
-        {
-            videoPlayer.transform.gameObject.SetActive(true);
-            videoPlayer.Play();
-            videoPlayer.loopPointReached += EndReached;
-            blackBG.SetActive(false);
-        }
+        videoPlayer.transform.gameObject.SetActive(true);
+        videoPlayer.Play();
+        videoPlayer.loopPointReached += EndReached;
+        blackBG.SetActive(false);
     }
 
     void EndReached(UnityEngine.Video.VideoPlayer vp)
