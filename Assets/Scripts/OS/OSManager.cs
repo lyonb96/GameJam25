@@ -280,7 +280,8 @@ public class OSManager : MonoBehaviour
         blackScreen.color = new Color(0, 0, 0, 0);
         blackScreen.DOFade(1.0F, 5.0F).OnComplete(() =>
         {
-            // TODO: Run the credits video
+            var creditsPlayer = GameObject.Find("OverlayUI").GetComponent<CreditsPlayer>();
+            creditsPlayer.PlayVideo();
         });
     }
 
