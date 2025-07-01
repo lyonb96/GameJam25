@@ -249,6 +249,10 @@ public class OSManager : MonoBehaviour
 
         foreach (var window in openWindows)
         {
+            if (window.IsClosing)
+            {
+                continue;
+            }
             window.CloseWindow();
             yield return new WaitForSeconds(UnityEngine.Random.Range(0.05f, 0.3f));
         }
