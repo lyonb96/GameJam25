@@ -79,6 +79,11 @@ public class OSManager : MonoBehaviour
 
     public void SpawnWindow(OSWindow window)
     {
+        if (window.Title == "Antivirus Trainer 2.0" && !NarrativeScript.Instance.CanLaunchGame)
+        {
+            AddError("No virus incursion detected; you will be notified when an incursion happens.");
+            return;
+        }
         StartCoroutine(SpawnWindowRoutine(window, window.IsBlocking));
     }
 
